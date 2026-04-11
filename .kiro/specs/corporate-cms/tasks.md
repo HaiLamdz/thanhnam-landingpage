@@ -1,0 +1,293 @@
+# Implementation Plan: Corporate CMS
+
+## Overview
+
+Triển khai website công ty với Laravel 11 + Blade + MySQL theo thứ tự từ nền tảng đến tính năng.
+Stack: Laravel 11, Blade, MySQL, Bootstrap 5 CDN, TinyMCE CDN.
+
+## Tasks
+
+- [x] 1. Database migrations và seeders
+  - [x] 1.1 Tạo migration cho bảng `services`
+    - Các cột: id, title, slug (unique), summary, body, icon, image_path, status (enum draft/published), sort_order, timestamps
+    - _Requirements: 9.1, 9.6_
+  - [x] 1.2 Tạo migration cho bảng `news_posts`
+    - Các cột: id, title, slug (unique), excerpt, body, category_tag, featured_image_path, status, published_at, timestamps
+    - Thêm index composite `(status, published_at)`
+    - _Requirements: 10.1, 10.6_
+  - [x] 1.3 Tạo migration cho bảng `projects`
+    - Các cột: id, title, description, image_path (NOT NULL), status, timestamps
+    - _Requirements: 15.1, 15.7, 15.8_
+  - [x] 1.4 Tạo migration cho bảng `contact_messages`
+    - Các cột: id, name, email, subject, message, is_read (default 0), timestamps
+    - _Requirements: 11.1_
+  - [x] 1.5 Tạo migration cho bảng `site_settings`
+    - Các cột: id, key (unique), value (text nullable), timestamps
+    - _Requirements: 8.1_
+  - [x] 1.6 Tạo `SiteSettingSeeder` với toàn bộ 20 keys mặc định theo design
+    - Seed dữ liệu mặc định cho công ty Thành Nam TFC.,JSC
+    - _Requirements: 8.1, 8.5_
+  - [x] 1.7 Tạo `AdminUserSeeder` với 1 admin user mặc định
+    - email: admin@thanhnambm.vn, password: Admin@2024!
+    - _Requirements: 6.1_
+  - [x] 1.8 Đăng ký seeders vào `DatabaseSeeder`, chạy `php artisan migrate --seed` để xác nhận
+    - _Requirements: 8.1, 6.1_
+
+- [x] 2. Models Eloquent
+  - [x] 2.1 Tạo model `Service` với `$fillable`, `$casts` (status enum), scope `published()`
+    - _Requirements: 9.1, 3.1_
+  - [x] 2.2 Tạo model `NewsPost` với `$fillable`, `$casts`, scope `published()`, scope `orderedByDate()`
+    - _Requirements: 10.1, 4.2_
+  - [x] 2.3 Tạo model `Project` với `$fillable`, `$casts`, scope `published()`
+    - _Requirements: 15.1_
+  - [x] 2.4 Tạo model `ContactMessage` với `$fillable`, `$casts` (is_read boolean)
+    - _Requirements: 11.1_
+  - [x] 2.5 Tạo model `SiteSetting` với `$fillable`
+    - _Requirements: 8.1_
+
+- [x] 3. Services và Helpers
+  - [x] 3.1 Tạo `SlugService` — method `generate(string $title, string $modelClass, ?int $excludeId): string`
+    - Dùng `Str::slug()`, kiểm tra uniqueness trong bảng model, append `-{n}` nếu collision
+    - _Requirements: 9.6, 9.7, 10.7, 12.1, 12.2, 12.4_
+  - [ ]* 3.2 Viết property test cho `SlugService` — Property 9: Slug format validity
+    - **Property 9: Slug Format Validity**
+    - **Validates: Requirements 12.1, 12.2, 9.6, 10.7**
+  - [ ]* 3.3 Viết property test cho `SlugService` — Property 10: Slug uniqueness with collision suffix
+    - **Property 10: Slug Uniqueness with Collision Suffix**
+    - **Validates: Requirements 12.4, 9.7**
+  - [x] 3.4 Tạo `ImageService` — methods `store(UploadedFile, string $dir): string` và `delete(?string $path): void`
+    - Validate MIME (jpeg/png/webp), max 2MB, lưu vào `storage/app/public/uploads/{dir}`
+    - _Requirements: 13.1, 13.2, 13.3, 13.4_
+  - [ ]* 3.5 Viết property test cho `ImageService` — Property 14: Image upload validation
+    - **Property 14: Image Upload Validation**
+    - **Validates: Requirements 13.1, 13.2**
+  - [x] 3.6 Tạo `SettingHelper` — global function `setting(string $key, string $default = ''): string`
+    - Dùng `Cache::remember('site_settings', ...)` để cache toàn bộ settings, tránh N+1
+    - Đăng ký helper trong `composer.json` autoload files
+    - _Requirements: 1.6, 1.8, 1.16, 1.20, 1.22, 8.2_
+
+- [x] 4. Admin Authentication
+  - [x] 4.1 Tạo `AdminAuth` middleware — check `Auth::check()`, redirect về `/admin/login` nếu chưa auth
+    - Đăng ký middleware alias `admin.auth` trong `bootstrap/app.php`
+    - _Requirements: 6.4, 6.5_
+  - [x] 4.2 Tạo `AuthController` với methods `showLogin()`, `login()`, `logout()`
+    - `login()`: dùng `Auth::attempt()`, redirect dashboard nếu thành công, trả về generic error nếu thất bại
+    - `logout()`: `Auth::logout()`, invalidate session, redirect `/admin/login`
+    - _Requirements: 6.1, 6.2, 6.3, 6.6_
+  - [x] 4.3 Tạo view `admin/auth/login.blade.php` — form email + password, hiển thị lỗi generic
+    - Dùng Bootstrap 5 CDN, không cần admin layout
+    - _Requirements: 6.1, 6.3_
+  - [ ]* 4.4 Viết feature test cho admin auth — Property 8: Admin Auth Middleware
+    - **Property 8: Admin Auth Middleware**
+    - **Validates: Requirements 6.4, 6.5**
+
+- [x] 5. Admin Layout và shared components
+  - [x] 5.1 Tạo `layouts/admin.blade.php` với Bootstrap 5 CDN, sidebar, topbar, `@yield('content')`
+    - Inject `$unreadCount` vào sidebar qua View Composer
+    - _Requirements: 7.1, 11.5_
+  - [x] 5.2 Tạo `components/admin/sidebar.blade.php` — nav links (Dashboard, Settings, Services, News, Projects, Messages) + badge unread
+    - _Requirements: 11.5_
+  - [x] 5.3 Tạo `components/admin/alert.blade.php` — hiển thị flash session `success` và `error`
+    - _Requirements: 9.2, 10.2, 11.4_
+  - [x] 5.4 Tạo `components/admin/image-preview.blade.php` — hiển thị ảnh hiện tại khi edit
+    - _Requirements: 9.8, 10.8, 13.4_
+  - [x] 5.5 Đăng ký View Composer trong `AppServiceProvider` để inject `$unreadCount` vào admin layout
+    - `ContactMessage::where('is_read', false)->count()`
+    - _Requirements: 11.5_
+  - [ ]* 5.6 Viết feature test — Property 18: Unread count accuracy
+    - **Property 18: Unread Count Accuracy**
+    - **Validates: Requirements 11.5**
+
+- [x] 6. Admin Dashboard và Settings
+  - [x] 6.1 Tạo `DashboardController` — method `index()`, view `admin/dashboard.blade.php`
+    - Hiển thị welcome message
+    - _Requirements: 7.1_
+  - [x] 6.2 Tạo `SettingController` — methods `index()` và `update()`
+    - `index()`: load tất cả settings, group theo section
+    - `update()`: validate, lưu từng key-value, xử lý image upload (hero_bg_image, about_image) qua `ImageService`, clear cache settings
+    - _Requirements: 8.1, 8.2, 8.3, 8.4, 8.5_
+  - [x] 6.3 Tạo view `admin/settings/index.blade.php` — form grouped theo section (Hero, About Teaser, CTA Banner, Contact Info, Footer)
+    - Dùng `<x-admin.image-preview>` cho các field ảnh
+    - _Requirements: 8.1, 8.4, 8.5_
+  - [ ]* 6.4 Viết property test — Property 1: SiteSetting round-trip
+    - **Property 1: SiteSetting Round-Trip**
+    - **Validates: Requirements 1.6, 1.8, 1.16, 1.20, 1.22, 8.2**
+
+- [x] 7. Admin Services CRUD
+  - [x] 7.1 Tạo `StoreServiceRequest` — validate title (required, max 255), summary (required), status, image (nullable, mimes, max 2048)
+    - _Requirements: 9.3_
+  - [x] 7.2 Tạo `Admin\ServiceController` với đầy đủ resource methods (index, create, store, edit, update, destroy)
+    - `store()`: gọi `SlugService::generate()`, `ImageService::store()` nếu có ảnh
+    - `update()`: gọi `ImageService::delete()` + `store()` nếu thay ảnh mới
+    - `destroy()`: gọi `ImageService::delete()` trước khi xóa record
+    - _Requirements: 9.1, 9.2, 9.4, 9.5, 9.6, 9.7, 9.8_
+  - [x] 7.3 Tạo views `admin/services/` — index.blade.php (table với title, status, actions), create.blade.php, edit.blade.php
+    - _Requirements: 9.1_
+  - [ ]* 7.4 Viết property test — Property 16: CRUD persistence (Services)
+    - **Property 16: CRUD Persistence — Services**
+    - **Validates: Requirements 9.2, 9.4, 9.5**
+  - [ ]* 7.5 Viết property test — Property 15: Image storage and replacement (Services)
+    - **Property 15: Image Storage and Replacement**
+    - **Validates: Requirements 13.3, 13.4, 13.5**
+
+- [x] 8. Admin News CRUD
+  - [x] 8.1 Tạo `StoreNewsPostRequest` — validate title, body (required), excerpt, category_tag, status, published_at, featured_image
+    - _Requirements: 10.3_
+  - [x] 8.2 Tạo `Admin\NewsController` với đầy đủ resource methods
+    - `store()`: gọi `SlugService`, `ImageService`, set `published_at` khi status = published
+    - `update()`: xử lý thay ảnh qua `ImageService`
+    - `destroy()`: xóa ảnh trước khi xóa record
+    - _Requirements: 10.1, 10.2, 10.4, 10.5, 10.6, 10.7, 10.8, 10.9_
+  - [x] 8.3 Tạo views `admin/news/` — index.blade.php (table với title, status, published_at, actions), create.blade.php (với TinyMCE CDN cho body), edit.blade.php
+    - _Requirements: 10.1_
+  - [ ]* 8.4 Viết property test — Property 16: CRUD persistence (News)
+    - **Property 16: CRUD Persistence — News**
+    - **Validates: Requirements 10.2, 10.4, 10.5**
+
+- [x] 9. Admin Projects CRUD
+  - [x] 9.1 Tạo `StoreProjectRequest` — validate title (required), description, image (required khi create, mimes, max 2048), status
+    - _Requirements: 15.3, 15.7_
+  - [x] 9.2 Tạo `Admin\ProjectController` với đầy đủ resource methods
+    - `store()`: `ImageService::store()` bắt buộc
+    - `update()`: xử lý thay ảnh
+    - `destroy()`: xóa ảnh trước khi xóa record
+    - _Requirements: 15.1, 15.2, 15.4, 15.5, 15.7, 15.8_
+  - [x] 9.3 Tạo views `admin/projects/` — index.blade.php, create.blade.php, edit.blade.php
+    - _Requirements: 15.1_
+  - [ ]* 9.4 Viết property test — Property 16: CRUD persistence (Projects)
+    - **Property 16: CRUD Persistence — Projects**
+    - **Validates: Requirements 15.2, 15.4, 15.5**
+
+- [x] 10. Admin Contact Messages
+  - [x] 10.1 Tạo `Admin\ContactMessageController` với methods `index()`, `show()`, `destroy()`
+    - `show()`: set `is_read = true` khi xem
+    - `destroy()`: xóa record, redirect với success message
+    - _Requirements: 11.1, 11.2, 11.3, 11.4_
+  - [x] 10.2 Tạo views `admin/contact-messages/` — index.blade.php (phân biệt read/unread bằng style), show.blade.php
+    - _Requirements: 11.1, 11.3_
+  - [ ]* 10.3 Viết feature test — Property 17: Mark-as-read on view
+    - **Property 17: Mark-as-Read on View**
+    - **Validates: Requirements 11.2**
+
+- [x] 11. Checkpoint — Admin Panel hoàn chỉnh
+  - Đảm bảo tất cả admin routes hoạt động, auth middleware bảo vệ đúng, CRUD đầy đủ.
+  - Chạy `php artisan test --filter=Admin` để xác nhận. Hỏi user nếu có vấn đề.
+
+- [x] 12. Public Layout và shared components
+  - [x] 12.1 Tạo `layouts/public.blade.php` — `@yield('meta')`, `@yield('content')`, include navbar + footer
+    - _Requirements: 1.2, 1.21_
+  - [x] 12.2 Tạo `components/public/navbar.blade.php` — links: Home, About, Services, News, Contact
+    - _Requirements: 1.2_
+  - [x] 12.3 Tạo `components/public/footer.blade.php` — logo, description, nav links, social icons
+    - Dùng `setting()` helper cho footer_description, social URLs, company_logo
+    - _Requirements: 1.21, 1.22_
+  - [ ]* 12.4 Viết feature test — Property 2: Consistent public layout
+    - **Property 2: Consistent Public Layout**
+    - **Validates: Requirements 1.2, 1.21**
+
+- [x] 13. Public Home Page
+  - [x] 13.1 Tạo `HomeController` — load settings, services (published, limit 3), projects (published, order created_at desc), posts (published, latest 3), truyền vào view
+    - _Requirements: 1.1, 1.9, 1.11, 1.13_
+  - [x] 13.2 Tạo `components/public/hero.blade.php` — headline, description, bg image, 2 CTA buttons
+    - Dùng `setting()` cho hero_headline, hero_description, hero_bg_image
+    - _Requirements: 1.3, 1.4, 1.5, 1.6_
+  - [x] 13.3 Tạo `components/public/about-teaser.blade.php` — image trái, text phải, statistic, "Learn More" button
+    - _Requirements: 1.7, 1.8_
+  - [x] 13.4 Tạo `components/public/core-competencies.blade.php` — grid 3 cột, hiển thị `min(count, 3)` services
+    - Hiển thị placeholder nếu không có service nào
+    - _Requirements: 1.9, 1.10_
+  - [ ]* 13.5 Viết property test — Property 3: Core competencies count bound
+    - **Property 3: Core Competencies Count Bound**
+    - **Validates: Requirements 1.9, 1.10**
+  - [x] 13.6 Tạo `components/public/recent-projects.blade.php` — gallery grid, placeholder nếu không có project
+    - _Requirements: 1.11, 1.12_
+  - [ ]* 13.7 Viết property test — Property 4: Recent projects display
+    - **Property 4: Recent Projects Display**
+    - **Validates: Requirements 1.11, 1.12, 15.9**
+  - [x] 13.8 Tạo `components/public/industry-insights.blade.php` — 3 news cards (category_tag, date, title, excerpt), placeholder nếu rỗng
+    - _Requirements: 1.13, 1.14_
+  - [ ]* 13.9 Viết property test — Property 5: Industry insights latest-3
+    - **Property 5: Industry Insights Latest-3**
+    - **Validates: Requirements 1.13, 1.14**
+  - [x] 13.10 Tạo `components/public/cta-banner.blade.php` — heading, description, "Contact Us" button
+    - _Requirements: 1.15, 1.16_
+  - [x] 13.11 Tạo `components/public/contact-mini.blade.php` — company info trái, form (name, email, subject, message) phải
+    - Form POST đến `/contact`, hiển thị inline errors và success flash
+    - _Requirements: 1.17, 1.18, 1.19, 1.20_
+  - [x] 13.12 Tạo view `public/home.blade.php` — compose tất cả components theo thứ tự
+    - Override `@section('meta')` với title và meta description
+    - _Requirements: 1.1, 14.1, 14.2_
+
+- [x] 14. Public About, Services, News, Contact Pages
+  - [x] 14.1 Tạo `AboutController` + view `public/about.blade.php`
+    - Hiển thị `setting('about_page_content')` với `{!! !!}` (rich text)
+    - _Requirements: 2.1, 2.2_
+  - [x] 14.2 Tạo `Public\ServiceController` — `index()` (all published), `show($slug)` (findOrFail + published, 404 nếu không có)
+    - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5_
+  - [x] 14.3 Tạo views `public/services/index.blade.php` (listing với placeholder) và `show.blade.php` (detail + OG meta)
+    - _Requirements: 3.2, 3.3, 14.3_
+  - [ ]* 14.4 Viết property test — Property 20: Services listing completeness
+    - **Property 20: Services Listing Completeness**
+    - **Validates: Requirements 3.2, 3.3**
+  - [ ]* 14.5 Viết property test — Property 11: Slug round-trip resolution (Services)
+    - **Property 11: Slug Round-Trip Resolution**
+    - **Validates: Requirements 12.3, 3.4, 3.5**
+  - [x] 14.6 Tạo `Public\NewsController` — `index()` (paginate 10, published, order published_at desc), `show($slug)` (published only, 404 nếu không có)
+    - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.5_
+  - [x] 14.7 Tạo views `public/news/index.blade.php` (listing + pagination) và `show.blade.php` (detail + OG meta)
+    - Hiển thị category_tag trên mỗi card
+    - _Requirements: 4.2, 10.10, 14.3_
+  - [ ]* 14.8 Viết property test — Property 12: News listing order
+    - **Property 12: News Listing Order**
+    - **Validates: Requirements 4.2**
+  - [ ]* 14.9 Viết property test — Property 13: News pagination
+    - **Property 13: News Pagination**
+    - **Validates: Requirements 4.3**
+  - [x] 14.10 Tạo `StoreContactRequest` — validate name (required, max 255), email (required, email format), subject (required, max 255), message (required, max 5000)
+    - _Requirements: 5.4, 5.5_
+  - [x] 14.11 Tạo `Public\ContactController` — `index()` (show form), `store()` (validate, lưu ContactMessage, redirect back với success)
+    - Dùng chung cho cả trang Contact và mini-form Home
+    - _Requirements: 5.1, 5.2, 5.3_
+  - [x] 14.12 Tạo view `public/contact.blade.php` — form (name, email, subject, message), inline errors, success message
+    - _Requirements: 5.1_
+  - [ ]* 14.13 Viết property test — Property 6: Contact form submission persistence
+    - **Property 6: Contact Form Submission Persistence**
+    - **Validates: Requirements 1.18, 5.2**
+  - [ ]* 14.14 Viết property test — Property 7: Contact form validation rejection
+    - **Property 7: Contact Form Validation Rejection**
+    - **Validates: Requirements 1.19, 5.3, 5.4, 5.5**
+
+- [x] 15. Routes và wiring
+  - [x] 15.1 Khai báo tất cả public routes trong `routes/web.php`
+    - GET /, /about, /services, /services/{slug}, /news, /news/{slug}, /contact, POST /contact
+    - _Requirements: 1.1, 2.1, 3.1, 3.4, 4.1, 4.4, 5.1_
+  - [x] 15.2 Khai báo admin routes — auth routes (không middleware) + protected group (prefix admin, middleware admin.auth)
+    - Resource routes: services, news, projects, contact-messages (only index/show/destroy)
+    - _Requirements: 6.1, 6.4, 7.1, 8.1, 9.1, 10.1, 11.1, 15.1_
+  - [x] 15.3 Tạo custom 404 view `resources/views/errors/404.blade.php`
+    - _Requirements: 3.5, 4.5_
+  - [x] 15.4 Chạy `php artisan storage:link` để tạo symlink `/storage`
+    - _Requirements: 13.5_
+
+- [x] 16. SEO Meta Tags
+  - [x] 16.1 Cập nhật `layouts/public.blade.php` với `@yield('meta')` default (title + meta description)
+    - _Requirements: 14.1, 14.2_
+  - [x] 16.2 Override `@section('meta')` trong từng public view với title riêng và meta description
+    - Service show + News show: thêm OG tags (og:title, og:description, og:image)
+    - _Requirements: 14.1, 14.2, 14.3_
+  - [ ]* 16.3 Viết feature test — Property 19: SEO meta tags presence
+    - **Property 19: SEO Meta Tags Presence**
+    - **Validates: Requirements 14.1, 14.2, 14.3**
+
+- [x] 17. Checkpoint cuối — Toàn bộ hệ thống
+  - Chạy `php artisan test` để đảm bảo tất cả tests pass.
+  - Kiểm tra `php artisan route:list` để xác nhận tất cả routes đúng.
+  - Hỏi user nếu có vấn đề phát sinh.
+
+## Notes
+
+- Tasks đánh dấu `*` là optional — có thể bỏ qua để implement MVP nhanh hơn
+- Property tests dùng thư viện **Eris** (cài qua `composer require --dev giorgiosironi/eris`)
+- Mỗi task tham chiếu requirements cụ thể để đảm bảo traceability
+- Thứ tự tasks đảm bảo không có orphaned code: DB → Models → Services → Auth → Admin → Public
+- `setting()` helper phải được implement trước khi tạo bất kỳ public view nào
