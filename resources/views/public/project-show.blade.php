@@ -46,23 +46,6 @@ $galleryImgs = [
                data-aos="fade-up" data-aos-delay="200">
                 {{ Str::limit(strip_tags($project->description), 180) }}
             </p>
-
-            {{-- Meta row --}}
-            <div class="d-flex flex-wrap gap-4" data-aos="fade-up" data-aos-delay="300">
-                @foreach([
-                    ['label'=>'Khách hàng','value'=>$project->client ?: setting('company_name', 'Thành Nam TFC')],
-                    ['label'=>'Địa điểm','value'=>$project->location ?: 'Hà Nội, Việt Nam'],
-                    ['label'=>'Năm','value'=>$project->created_at?->format('Y') ?? date('Y')],
-                    ['label'=>'Dịch vụ','value'=>$project->services ?: 'Thi công & Giám sát'],
-                ] as $meta)
-                <div>
-                    <div style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,.4);margin-bottom:.2rem;">
-                        {{ $meta['label'] }}
-                    </div>
-                    <div style="font-size:.9rem;color:#fff;font-weight:500;">{{ $meta['value'] }}</div>
-                </div>
-                @endforeach
-            </div>
         </div>
     </div>
 </section>
@@ -99,9 +82,8 @@ $galleryImgs = [
                     </h5>
                     <div class="d-flex flex-column gap-3">
                         @foreach([
-                            ['icon'=>'bi-person-fill','label'=>'Khách hàng','value'=>$project->client ?: setting('company_name', 'Thành Nam TFC.,JSC')],
+                            ['icon'=>'bi-person-fill','label'=>'Chủ đầu tư','value'=>$project->client ?: setting('company_name', 'Thành Nam TFC.,JSC')],
                             ['icon'=>'bi-geo-alt-fill','label'=>'Địa điểm','value'=>$project->location ?: setting('contact_address', 'Hà Nội, Việt Nam')],
-                            ['icon'=>'bi-calendar3','label'=>'Năm thực hiện','value'=>$project->created_at?->format('Y') ?? date('Y')],
                             ['icon'=>'bi-tag-fill','label'=>'Danh mục','value'=>$project->category ?: 'Hạ tầng & Nền móng'],
                             ['icon'=>'bi-tools','label'=>'Dịch vụ','value'=>$project->services ?: 'Thi công, Giám sát, Tư vấn'],
                             ['icon'=>'bi-check-circle-fill','label'=>'Trạng thái','value'=>$project->completion_status ?: 'Hoàn thành'],

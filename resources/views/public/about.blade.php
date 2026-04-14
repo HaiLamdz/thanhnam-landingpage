@@ -1,8 +1,8 @@
 @extends('layouts.public')
 
 @section('meta')
-<title>Giới thiệu & Dịch vụ — {{ setting('company_name') }}</title>
-<meta name="description" content="{{ setting('meta_description_default') }}">
+<title>Giới thiệu — {{ setting('company_name', 'Thành Nam TFC') }}</title>
+<meta name="description" content="Công ty Cổ phần Thương mại Xây dựng Nền Móng Thành Nam - Chuyên thi công ép cọc, nền móng, thí nghiệm vật liệu xây dựng.">
 @endsection
 
 @section('content')
@@ -20,29 +20,39 @@
                     TINH HOA KỸ THUẬT
                 </span>
                 <h1 class="fw-bold mb-4" style="font-size:clamp(1.8rem,5vw,3rem);color:#0d1b2a;line-height:1.2;">
-                    Định Hình Lại<br>
-                    <span style="color:#e8a020;">Kiến Trúc</span><br>
-                    Kết Cấu.
+                    Công Ty CPTM<br>
+                    <span style="color:#e8a020;">Xây Dựng Nền Móng</span><br>
+                    Thành Nam
                 </h1>
                 <p style="color:#6c757d;line-height:1.8;font-size:.95rem;margin-bottom:2rem;">
-                    Chúng tôi là đơn vị tiên phong trong lĩnh vực kỹ thuật công trình. Với đội ngũ chuyên gia giàu kinh nghiệm, chúng tôi cung cấp các giải pháp kỹ thuật toàn diện, đáp ứng mọi yêu cầu khắt khe nhất của thị trường.
+                    Thành lập năm 2014, chúng tôi chuyên hoạt động trong lĩnh vực xây dựng và nền móng với đội ngũ cán bộ chuyên ngành nhiều năm kinh nghiệm. Cam kết thực hiện dự án theo tiêu chí: <strong>An toàn – Tiến độ – Chất lượng – Giá cả cạnh tranh.</strong>
                 </p>
 
                 {{-- Stats --}}
-                <div class="row g-3">
+                <div class="row g-3 mb-4">
                     <div class="col-4">
-                        <div class="fw-bold" style="font-size:clamp(1.4rem,4vw,2rem);color:#0d1b2a;line-height:1;">250+</div>
-                        <div style="font-size:.7rem;color:#adb5bd;margin-top:.3rem;text-transform:uppercase;letter-spacing:.5px;">Dự án</div>
+                        <div class="fw-bold" style="font-size:clamp(1.4rem,4vw,2rem);color:#0d1b2a;line-height:1;">10+</div>
+                        <div style="font-size:.7rem;color:#adb5bd;margin-top:.3rem;text-transform:uppercase;letter-spacing:.5px;">Năm kinh nghiệm</div>
                     </div>
                     <div class="col-4" style="border-left:1px solid #e9ecef;">
-                        <div class="fw-bold" style="font-size:clamp(1.4rem,4vw,2rem);color:#0d1b2a;line-height:1;">15</div>
-                        <div style="font-size:.7rem;color:#adb5bd;margin-top:.3rem;text-transform:uppercase;letter-spacing:.5px;">Giải thưởng</div>
+                        <div class="fw-bold" style="font-size:clamp(1.4rem,4vw,2rem);color:#0d1b2a;line-height:1;">15+</div>
+                        <div style="font-size:.7rem;color:#adb5bd;margin-top:.3rem;text-transform:uppercase;letter-spacing:.5px;">Dự án tiêu biểu</div>
                     </div>
                     <div class="col-4" style="border-left:1px solid #e9ecef;">
-                        <div class="fw-bold" style="font-size:clamp(1.4rem,4vw,2rem);color:#0d1b2a;line-height:1;">40+</div>
+                        <div class="fw-bold" style="font-size:clamp(1.4rem,4vw,2rem);color:#0d1b2a;line-height:1;">10+</div>
                         <div style="font-size:.7rem;color:#adb5bd;margin-top:.3rem;text-transform:uppercase;letter-spacing:.5px;">Chuyên gia</div>
                     </div>
                 </div>
+
+                {{-- Download button --}}
+                <a href="{{ asset('pdf/ho-so-nang-luc.pdf') }}"
+                   download
+                   class="d-inline-flex align-items-center gap-2 fw-semibold text-decoration-none px-4 py-2 rounded"
+                   style="background:#e8a020;color:#fff;font-size:.9rem;border:2px solid #e8a020;transition:.2s;"
+                   onmouseover="this.style.background='#cf8c18';this.style.borderColor='#cf8c18'"
+                   onmouseout="this.style.background='#e8a020';this.style.borderColor='#e8a020'">
+                    <i class="bi bi-download"></i> Tải hồ sơ năng lực (PDF)
+                </a>
             </div>
 
             {{-- Right: Image --}}
@@ -53,7 +63,7 @@
                          class="img-fluid rounded w-100"
                          style="max-height:420px;object-fit:cover;box-shadow:0 12px 40px rgba(0,0,0,.12);">
                 @else
-                    <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=900&q=80"
+                    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=900&q=80"
                          alt="Về chúng tôi"
                          class="img-fluid rounded w-100"
                          style="max-height:420px;object-fit:cover;box-shadow:0 12px 40px rgba(0,0,0,.12);">
@@ -65,143 +75,172 @@
 </section>
 
 {{-- ============================================================
-     2. VISION & MISSION
+     2. THÔNG TIN CHUNG
      ============================================================ --}}
 <section style="padding:80px 0;background:#f8f9fa;">
     <div class="container">
-
-        {{-- Two cards --}}
-        <div class="row g-4 mb-4">
-            {{-- Vision card --}}
-            <div class="col-md-6" data-aos="fade-right">
-                <div class="h-100 p-5 rounded" style="background:#fff;border:1px solid #e9ecef;">
-                    <div class="mb-3 d-flex align-items-center justify-content-center rounded"
-                         style="width:48px;height:48px;background:rgba(232,160,32,.12);">
-                        <i class="bi bi-eye" style="color:#e8a020;font-size:1.2rem;"></i>
+        <div class="row g-4">
+            {{-- Info cards --}}
+            <div class="col-lg-7" data-aos="fade-right">
+                <span style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:#e8a020;">
+                    Thông tin công ty
+                </span>
+                <h2 class="fw-bold mt-2 mb-4" style="font-size:clamp(1.4rem,3vw,2rem);color:#0d1b2a;">
+                    Thông Tin Chung
+                </h2>
+                <div class="row g-3">
+                    @foreach([
+                        ['icon'=>'bi-building','label'=>'Tên công ty',   'value'=>'Công ty Cổ phần Thương mại Xây dựng Nền Móng Thành Nam'],
+                        ['icon'=>'bi-tag',     'label'=>'Tên viết tắt',  'value'=>'Thành Nam TFC., JSC.'],
+                        ['icon'=>'bi-geo-alt', 'label'=>'Địa chỉ',       'value'=>'Số 12/3/33 ngõ 2 phố Văn Trì, Phường Tây Tựu, TP. Hà Nội'],
+                        ['icon'=>'bi-file-text','label'=>'Mã số thuế',   'value'=>'0201574928'],
+                        ['icon'=>'bi-envelope','label'=>'Email',          'value'=>'Thanhnam.tfc@gmail.com'],
+                        ['icon'=>'bi-telephone','label'=>'Điện thoại',   'value'=>'0972.428.939'],
+                        ['icon'=>'bi-bank',    'label'=>'Số tài khoản',  'value'=>'19037066281010 — Techcombank CN Nguyễn Cơ Thạch'],
+                    ] as $info)
+                    <div class="col-12">
+                        <div class="d-flex align-items-start gap-3 p-3 rounded bg-white" style="border:1px solid #e9ecef;">
+                            <div class="d-flex align-items-center justify-content-center rounded flex-shrink-0"
+                                 style="width:38px;height:38px;background:rgba(232,160,32,.1);">
+                                <i class="bi {{ $info['icon'] }}" style="color:#e8a020;font-size:1rem;"></i>
+                            </div>
+                            <div>
+                                <div style="font-size:.72rem;color:#adb5bd;text-transform:uppercase;letter-spacing:.5px;margin-bottom:.15rem;">{{ $info['label'] }}</div>
+                                <div style="color:#0d1b2a;font-weight:500;font-size:.9rem;">{{ $info['value'] }}</div>
+                            </div>
+                        </div>
                     </div>
-                    <h4 class="fw-bold mb-3" style="color:#0d1b2a;">Tầm nhìn</h4>
-                    <p style="color:#6c757d;line-height:1.8;margin-bottom:0;">
-                        Trở thành đơn vị kỹ thuật công trình hàng đầu khu vực, tiên phong trong việc ứng dụng công nghệ tiên tiến để tạo ra những công trình bền vững, an toàn và thẩm mỹ cho thế hệ tương lai.
-                    </p>
+                    @endforeach
                 </div>
             </div>
 
-            {{-- Mission card --}}
-            <div class="col-md-6" data-aos="fade-left">
-                <div class="h-100 p-5 rounded" style="background:#0d1b2a;">
-                    <div class="mb-3 d-flex align-items-center justify-content-center rounded"
-                         style="width:48px;height:48px;background:rgba(232,160,32,.2);">
-                        <i class="bi bi-bullseye" style="color:#e8a020;font-size:1.2rem;"></i>
+            {{-- Giá trị cốt lõi --}}
+            <div class="col-lg-5" data-aos="fade-left">
+                <span style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:#e8a020;">
+                    Cam kết
+                </span>
+                <h2 class="fw-bold mt-2 mb-4" style="font-size:clamp(1.4rem,3vw,2rem);color:#0d1b2a;">
+                    Giá Trị Cốt Lõi
+                </h2>
+                <div class="row g-3">
+                    @foreach([
+                        ['icon'=>'bi-shield-check','title'=>'An toàn','desc'=>'Đặt an toàn lao động và công trình lên hàng đầu trong mọi dự án.'],
+                        ['icon'=>'bi-clock','title'=>'Tiến độ','desc'=>'Cam kết hoàn thành đúng hạn, không để khách hàng chờ đợi.'],
+                        ['icon'=>'bi-award','title'=>'Chất lượng','desc'=>'Tiêu chuẩn kỹ thuật cao, vật liệu đạt chuẩn, thi công chuyên nghiệp.'],
+                        ['icon'=>'bi-currency-dollar','title'=>'Giá cạnh tranh','desc'=>'Chi phí hợp lý, minh bạch, tối ưu giá trị cho khách hàng.'],
+                    ] as $item)
+                    <div class="col-6">
+                        <div class="p-3 rounded h-100" style="background:#fff;border:1px solid #e9ecef;">
+                            <i class="bi {{ $item['icon'] }} mb-2 d-block" style="color:#e8a020;font-size:1.3rem;"></i>
+                            <div class="fw-bold mb-1" style="color:#0d1b2a;font-size:.9rem;">{{ $item['title'] }}</div>
+                            <div style="color:#adb5bd;font-size:.8rem;line-height:1.5;">{{ $item['desc'] }}</div>
+                        </div>
                     </div>
-                    <h4 class="fw-bold mb-3" style="color:#fff;">Sứ mệnh</h4>
-                    <p style="color:rgba(255,255,255,.65);line-height:1.8;margin-bottom:0;">
-                        Cung cấp các giải pháp kỹ thuật xuất sắc, đáp ứng và vượt kỳ vọng của khách hàng. Chúng tôi cam kết mang lại chất lượng tốt nhất, đúng tiến độ và trong ngân sách, đồng thời xây dựng mối quan hệ đối tác lâu dài.
-                    </p>
+                    @endforeach
                 </div>
             </div>
         </div>
-
-        {{-- 4 feature boxes --}}
-        <div class="row g-3">
-            @foreach([
-                ['icon'=>'bi-shield-check','title'=>'Chính trực','desc'=>'Minh bạch và trung thực trong mọi giao dịch và quyết định.'],
-                ['icon'=>'bi-lightbulb','title'=>'Đổi mới','desc'=>'Không ngừng tìm kiếm giải pháp sáng tạo cho mọi thách thức.'],
-                ['icon'=>'bi-leaf','title'=>'Bền vững','desc'=>'Xây dựng với trách nhiệm với môi trường và cộng đồng.'],
-                ['icon'=>'bi-crosshair','title'=>'Chính xác','desc'=>'Tỉ mỉ và chính xác trong từng chi tiết kỹ thuật.'],
-            ] as $item)
-            <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                <div class="p-4 rounded text-center h-100" style="background:#fff;border:1px solid #e9ecef;">
-                    <i class="bi {{ $item['icon'] }} mb-2 d-block" style="color:#e8a020;font-size:1.4rem;"></i>
-                    <div class="fw-bold mb-1" style="color:#0d1b2a;font-size:.95rem;">{{ $item['title'] }}</div>
-                    <div style="color:#adb5bd;font-size:.8rem;line-height:1.5;">{{ $item['desc'] }}</div>
-                </div>
-            </div>
-            @endforeach
-        </div>
-
     </div>
 </section>
 
 {{-- ============================================================
-     3. EXPERTISE & SERVICES
+     3. LĨNH VỰC HOẠT ĐỘNG
      ============================================================ --}}
 <section style="padding:80px 0;background:#fff;">
     <div class="container">
-
-        {{-- Header row --}}
-        <div class="d-flex align-items-end justify-content-between mb-5 flex-wrap gap-3" data-aos="fade-up">
-            <div>
-                <span style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:#e8a020;">
-                    Chuyên môn
-                </span>
-                <h2 class="fw-bold mt-2 mb-1" style="font-size:clamp(1.6rem,3vw,2.2rem);color:#0d1b2a;">
-                    Chuyên Môn &amp; Dịch Vụ
-                </h2>
-                <p style="color:#6c757d;font-size:.9rem;max-width:480px;margin:0;">
-                    Chúng tôi cung cấp giải pháp kỹ thuật toàn diện, từ thiết kế đến thi công và quản lý dự án.
-                </p>
-            </div>
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:#e8a020;">
+                Chuyên môn
+            </span>
+            <h2 class="fw-bold mt-2" style="font-size:clamp(1.6rem,3vw,2.2rem);color:#0d1b2a;">
+                Lĩnh Vực Hoạt Động
+            </h2>
         </div>
 
-        {{-- Service rows --}}
         <div class="d-flex flex-column gap-0">
             @foreach([
-                ['num'=>'01','title'=>'Thiết kế & Phân tích kết cấu','desc'=>'Chúng tôi cung cấp giải pháp thiết kế kết cấu toàn diện, đảm bảo an toàn và tối ưu chi phí cho mọi loại công trình từ nhà ở đến tòa nhà thương mại.'],
-                ['num'=>'02','title'=>'Kỹ thuật chống động đất','desc'=>'Phân tích và thiết kế hệ thống kháng chấn tiên tiến, bảo vệ công trình trước các tác động địa chấn và đảm bảo an toàn cho người sử dụng.'],
-                ['num'=>'03','title'=>'Quản lý dự án','desc'=>'Điều phối toàn bộ quá trình từ lập kế hoạch đến nghiệm thu, đảm bảo dự án hoàn thành đúng tiến độ, trong ngân sách và đạt chất lượng cao nhất.'],
+                [
+                    'num' => '01',
+                    'title' => 'Thi công ép cọc bê tông',
+                    'desc' => 'Thi công nền móng công trình các loại. Sản xuất và thi công ép cọc bê tông cốt thép (200×200, 250×250, 300×300, 400×400 mm). Sản xuất và thi công ép cọc bê tông ly tâm dự ứng lực (D300, D400, D500, D600 mm). Cho thuê máy khoan cọc nhồi và Robot thi công ép cọc từ 100 đến 680 tấn.',
+                    'icon' => 'bi-hammer'
+                ],
+                [
+                    'num' => '02',
+                    'title' => 'Kiểm tra & tư vấn nền móng công trình',
+                    'desc' => 'Thí nghiệm sức chịu tải cọc bằng phương pháp ép tĩnh dọc trục, nhổ dọc trục, đẩy ngang, siêu âm, PDA, PIT. Kiểm tra nền đất bằng phương pháp xác định Modun biến dạng tấm nén phẳng. Khoan khảo sát địa chất công trình.',
+                    'icon' => 'bi-search'
+                ],
+                [
+                    'num' => '03',
+                    'title' => 'Xây dựng công trình',
+                    'desc' => 'Cung cấp và ép các loại cọc bê tông cốt thép, bê tông dự ứng lực. Xây dựng các công trình nhà văn hóa, trường học, thủy lợi và hạ tầng kỹ thuật.',
+                    'icon' => 'bi-building'
+                ],
+                [
+                    'num' => '04',
+                    'title' => 'Thí nghiệm vật liệu xây dựng',
+                    'desc' => 'Thí nghiệm vật liệu xây dựng dân dụng tại phòng thí nghiệm và ngoài hiện trường. Thí nghiệm vật liệu chuyên ngành cầu đường. Được Bộ Xây dựng cấp phép hoạt động thí nghiệm chuyên ngành xây dựng LAXD 1780 (cấp ngày 25/06/2021).',
+                    'icon' => 'bi-clipboard-data'
+                ],
             ] as $i => $svc)
             <div class="d-flex align-items-start gap-4 py-4 {{ $i > 0 ? 'border-top' : '' }}"
                  style="border-color:#e9ecef !important;"
-                 data-aos="fade-up" data-aos-delay="{{ $i * 100 }}">
+                 data-aos="fade-up" data-aos-delay="{{ $i * 80 }}">
                 <div class="fw-bold flex-shrink-0" style="font-size:1.5rem;color:#e9ecef;min-width:48px;">
                     {{ $svc['num'] }}
                 </div>
                 <div class="flex-grow-1">
-                    <h5 class="fw-bold mb-2" style="color:#0d1b2a;">{{ $svc['title'] }}</h5>
+                    <h5 class="fw-bold mb-2" style="color:#0d1b2a;">
+                        <i class="bi {{ $svc['icon'] }} me-2" style="color:#e8a020;"></i>{{ $svc['title'] }}
+                    </h5>
                     <p class="mb-0" style="color:#6c757d;font-size:.9rem;line-height:1.7;">{{ $svc['desc'] }}</p>
-                </div>
-                <div class="flex-shrink-0 d-flex align-items-center justify-content-center rounded-circle"
-                     style="width:40px;height:40px;background:#f8f9fa;cursor:pointer;transition:.2s;"
-                     onmouseover="this.style.background='#0d1b2a';this.querySelector('i').style.color='#fff'"
-                     onmouseout="this.style.background='#f8f9fa';this.querySelector('i').style.color='#0d1b2a'">
-                    <i class="bi bi-arrow-right" style="color:#0d1b2a;"></i>
                 </div>
             </div>
             @endforeach
         </div>
-
     </div>
 </section>
 
 {{-- ============================================================
-     4. PROCESS SECTION
+     4. BỘ MÁY QUẢN LÝ
      ============================================================ --}}
 <section style="padding:80px 0;background:#0d1b2a;">
     <div class="container">
         <div class="text-center mb-5" data-aos="fade-up">
             <span style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:#e8a020;">
-                Quy trình làm việc
+                Đội ngũ
             </span>
             <h2 class="fw-bold mt-2" style="font-size:clamp(1.6rem,3vw,2.2rem);color:#fff;">
-                Quy Trình Của Chúng Tôi
+                Nhân Lực Chính
             </h2>
+            <p style="color:rgba(255,255,255,.5);max-width:480px;margin:.5rem auto 0;font-size:.9rem;">
+                Đội ngũ kỹ sư và chuyên gia giàu kinh nghiệm, tận tâm với nghề.
+            </p>
         </div>
 
-        <div class="row g-4">
+        <div class="row g-3 justify-content-center">
             @foreach([
-                ['icon'=>'bi-search','title'=>'Khảo sát','desc'=>'Tìm hiểu yêu cầu, phân tích địa điểm và đánh giá toàn diện các điều kiện kỹ thuật của dự án.'],
-                ['icon'=>'bi-pencil-square','title'=>'Thiết kế','desc'=>'Phát triển các phương án thiết kế sáng tạo, tối ưu hóa kết cấu và đảm bảo tính khả thi.'],
-                ['icon'=>'bi-calculator','title'=>'Phân tích','desc'=>'Kiểm tra và xác minh toàn bộ tính toán kỹ thuật, đảm bảo an toàn và tuân thủ tiêu chuẩn.'],
-                ['icon'=>'bi-check2-circle','title'=>'Bàn giao','desc'=>'Hoàn thiện hồ sơ, giám sát thi công và bàn giao công trình đúng tiến độ, đạt chất lượng.'],
-            ] as $step)
-            <div class="col-md-3 col-sm-6" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                <div class="text-center p-4">
-                    <div class="d-flex align-items-center justify-content-center rounded-circle mx-auto mb-3"
-                         style="width:60px;height:60px;background:rgba(232,160,32,.15);border:1px solid rgba(232,160,32,.3);">
-                        <i class="bi {{ $step['icon'] }}" style="color:#e8a020;font-size:1.3rem;"></i>
+                ['name'=>'KS. Trịnh Viết Dũng',    'role'=>'Giám đốc',              'degree'=>'Kỹ sư xây dựng'],
+                ['name'=>'KS. Vũ Thái Bảo',         'role'=>'Phó Giám đốc',          'degree'=>'Kỹ sư xây dựng'],
+                ['name'=>'Đặng Thị Thu Hằng',        'role'=>'Kế toán trưởng',        'degree'=>'Cử nhân'],
+                ['name'=>'Trần Thị Hoài Linh',       'role'=>'Kế toán',               'degree'=>'Cử nhân'],
+                ['name'=>'KS. Nguyễn Cao Cường',     'role'=>'Trưởng phòng kỹ thuật', 'degree'=>'Kỹ sư địa chất'],
+                ['name'=>'KS. Trần Văn Biên',        'role'=>'Cán bộ kỹ thuật',       'degree'=>'Kỹ sư địa chất'],
+                ['name'=>'KS. Phan Thị Phương',      'role'=>'Cán bộ kỹ thuật',       'degree'=>'Kỹ sư xây dựng'],
+                ['name'=>'KS. Đặng Ngọc Cương',      'role'=>'Cán bộ kỹ thuật',       'degree'=>'Kỹ sư xây dựng'],
+                ['name'=>'KS. Đặng Công Thành',      'role'=>'Cán bộ kỹ thuật',       'degree'=>'Kỹ sư cấp thoát nước'],
+                ['name'=>'KS. Nguyễn Văn Cường',     'role'=>'Cán bộ kỹ thuật',       'degree'=>'Kỹ sư xây dựng'],
+            ] as $i => $member)
+            <div class="col-md-2 col-sm-4 col-6" data-aos="fade-up" data-aos-delay="{{ ($i % 5) * 80 }}">
+                <div class="text-center p-3 rounded" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);">
+                    <div class="d-flex align-items-center justify-content-center rounded-circle mx-auto mb-2"
+                         style="width:48px;height:48px;background:rgba(232,160,32,.15);border:1px solid rgba(232,160,32,.3);">
+                        <i class="bi bi-person" style="color:#e8a020;font-size:1.2rem;"></i>
                     </div>
-                    <h5 class="fw-bold mb-2" style="color:#fff;">{{ $step['title'] }}</h5>
-                    <p style="color:rgba(255,255,255,.5);font-size:.875rem;line-height:1.7;margin:0;">{{ $step['desc'] }}</p>
+                    <div class="fw-bold" style="color:#fff;font-size:.85rem;">{{ $member['name'] }}</div>
+                    <div style="font-size:.75rem;color:#e8a020;font-weight:600;margin-top:.2rem;">{{ $member['role'] }}</div>
+                    <div style="font-size:.7rem;color:rgba(255,255,255,.4);margin-top:.1rem;">{{ $member['degree'] }}</div>
                 </div>
             </div>
             @endforeach
@@ -210,113 +249,213 @@
 </section>
 
 {{-- ============================================================
-     5. INSIDE OUR WORLD (Projects grid)
-     ============================================================ --}}
-<section style="padding:80px 0;background:#fff;">
-    <div class="container">
-        <div class="mb-5">
-            <span style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:#e8a020;">
-                Thế giới của chúng tôi
-            </span>
-            <h2 class="fw-bold mt-2" style="font-size:clamp(1.6rem,3vw,2.2rem);color:#0d1b2a;">
-                Bên Trong Thế Giới Của Chúng Tôi
-            </h2>
-        </div>
-
-        <div class="row g-3">
-            {{-- Large image left --}}
-            <div class="col-md-7" data-aos="fade-right">
-                <div class="overflow-hidden rounded" style="height:420px;">
-                    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=900&q=80"
-                         alt="Dự án 1" class="w-100 h-100" style="object-fit:cover;transition:transform .4s;"
-                         onmouseover="this.style.transform='scale(1.04)'"
-                         onmouseout="this.style.transform='scale(1)'">
-                </div>
-            </div>
-            {{-- 2 stacked right --}}
-            <div class="col-md-5 d-flex flex-column gap-3" data-aos="fade-left">
-                <div class="overflow-hidden rounded flex-grow-1" style="height:200px;">
-                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=700&q=80"
-                         alt="Dự án 2" class="w-100 h-100" style="object-fit:cover;transition:transform .4s;"
-                         onmouseover="this.style.transform='scale(1.04)'"
-                         onmouseout="this.style.transform='scale(1)'">
-                </div>
-                <div class="overflow-hidden rounded flex-grow-1" style="height:200px;">
-                    <img src="https://images.unsplash.com/photo-1590674899484-d5640e854abe?w=700&q=80"
-                         alt="Dự án 3" class="w-100 h-100" style="object-fit:cover;transition:transform .4s;"
-                         onmouseover="this.style.transform='scale(1.04)'"
-                         onmouseout="this.style.transform='scale(1)'">
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-{{-- ============================================================
-     6. TEAM SECTION
+     5. THIẾT BỊ NỀN MÓNG & THÍ NGHIỆM
      ============================================================ --}}
 <section style="padding:80px 0;background:#f8f9fa;">
     <div class="container">
         <div class="text-center mb-5" data-aos="fade-up">
             <span style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:#e8a020;">
-                Đội ngũ
+                Năng lực thiết bị
             </span>
             <h2 class="fw-bold mt-2" style="font-size:clamp(1.6rem,3vw,2.2rem);color:#0d1b2a;">
-                Những Người Đứng Sau Thành Công
+                Thiết Bị & Máy Móc
             </h2>
-            <p style="color:#6c757d;max-width:480px;margin:1rem auto 0;font-size:.95rem;line-height:1.7;">
-                Đội ngũ chuyên gia tài năng, giàu kinh nghiệm và đam mê với nghề.
-            </p>
         </div>
 
-        <div class="row g-4 justify-content-center">
-            @foreach([
-                ['name'=>'Nguyễn Minh Tuấn','role'=>'Giám đốc điều hành','img'=>'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80'],
-                ['name'=>'Trần Thị Hương','role'=>'Giám đốc thiết kế','img'=>'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80'],
-                ['name'=>'Lê Văn Khoa','role'=>'Trưởng dự án','img'=>'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80'],
-                ['name'=>'Phạm Thu Nga','role'=>'Trưởng kỹ thuật','img'=>'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80'],
-            ] as $member)
-            <div class="col-md-3 col-sm-6" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                <div class="text-center">
-                    <div class="overflow-hidden rounded mb-3 mx-auto" style="width:100%;max-width:220px;height:240px;">
-                        <img src="{{ $member['img'] }}" alt="{{ $member['name'] }}"
-                             class="w-100 h-100" style="object-fit:cover;filter:grayscale(30%);transition:.3s;"
-                             onmouseover="this.style.filter='grayscale(0%)';this.style.transform='scale(1.04)'"
-                             onmouseout="this.style.filter='grayscale(30%)';this.style.transform='scale(1)'">
-                    </div>
-                    <div class="fw-bold" style="color:#0d1b2a;">{{ $member['name'] }}</div>
-                    <div style="font-size:.8rem;color:#e8a020;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-top:.2rem;">
-                        {{ $member['role'] }}
-                    </div>
-                </div>
+        {{-- Bảng 1: Thiết bị nền móng --}}
+        <div class="mb-5" data-aos="fade-up">
+            <h5 class="fw-bold mb-3" style="color:#0d1b2a;">
+                <i class="bi bi-gear-fill me-2" style="color:#e8a020;"></i>Thiết bị hoạt động lĩnh vực nền móng, địa chất công trình
+            </h5>
+            <div class="table-responsive rounded" style="border:1px solid #e9ecef;">
+                <table class="table table-hover mb-0" style="font-size:.875rem;">
+                    <thead style="background:#0d1b2a;color:#fff;">
+                        <tr>
+                            <th class="py-3 px-4">Thiết bị</th>
+                            <th class="py-3 px-3 text-center">Công suất</th>
+                            <th class="py-3 px-3 text-center">Số lượng</th>
+                            <th class="py-3 px-3 text-center">Chất lượng còn lại</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach([
+                            ['name'=>'Máy robot ép cọc (sản xuất tại Trung Quốc)',          'power'=>'320, 420, 680 tấn', 'qty'=>'15',       'quality'=>'92%'],
+                            ['name'=>'Kích thủy lực KN1000 (sản xuất tại Mỹ)',              'power'=>'1.000 tấn',         'qty'=>'02',       'quality'=>'97%'],
+                            ['name'=>'Cẩu Kato (sản xuất tại Nhật)',                        'power'=>'25 tấn',            'qty'=>'01',       'quality'=>'85%'],
+                            ['name'=>'Máy khoan địa chất XY-1, XY1A-4',                    'power'=>'—',                 'qty'=>'05',       'quality'=>'90%'],
+                            ['name'=>'Kích thủy lực KN800, 500, 300, 200, 100 (TQ, VN)',   'power'=>'800 tấn',           'qty'=>'20',       'quality'=>'95%'],
+                            ['name'=>'Máy phát điện (sản xuất tại Nhật Bản)',               'power'=>'5–15 kW',           'qty'=>'05',       'quality'=>'95%'],
+                            ['name'=>'Máy toàn đạc điện tử Nikon DTM-350 (Nhật Bản)',      'power'=>'—',                 'qty'=>'05',       'quality'=>'95%'],
+                            ['name'=>'Máy thủy chuẩn AL 32 (sản xuất tại Nhật Bản)',       'power'=>'—',                 'qty'=>'05',       'quality'=>'95%'],
+                            ['name'=>'Đối trọng đúc sẵn (sản xuất tại Việt Nam)',           'power'=>'—',                 'qty'=>'2.000 tấn','quality'=>'95%'],
+                            ['name'=>'Dầm chính I (sản xuất tại Việt Nam)',                 'power'=>'—',                 'qty'=>'20',       'quality'=>'99%'],
+                            ['name'=>'Dầm phụ I (sản xuất tại Việt Nam)',                   'power'=>'—',                 'qty'=>'10',       'quality'=>'99%'],
+                            ['name'=>'Tôn gối kê (sản xuất tại Việt Nam)',                  'power'=>'—',                 'qty'=>'10',       'quality'=>'98%'],
+                            ['name'=>'Đồng hồ áp suất (sản xuất tại Trung Quốc)',           'power'=>'60 MPa',            'qty'=>'15',       'quality'=>'99%'],
+                            ['name'=>'Đồng hồ đo lún (sản xuất tại Trung Quốc)',            'power'=>'50 mm',             'qty'=>'30',       'quality'=>'99%'],
+                            ['name'=>'Máy PDA (sản xuất tại Trung Quốc)',                   'power'=>'—',                 'qty'=>'02',       'quality'=>'99%'],
+                            ['name'=>'Máy PIT',                                             'power'=>'—',                 'qty'=>'04',       'quality'=>'98%'],
+                        ] as $row)
+                        <tr>
+                            <td class="px-4 py-2">{{ $row['name'] }}</td>
+                            <td class="px-3 py-2 text-center" style="color:#6c757d;">{{ $row['power'] }}</td>
+                            <td class="px-3 py-2 text-center fw-bold" style="color:#0d1b2a;">{{ $row['qty'] }}</td>
+                            <td class="px-3 py-2 text-center">
+                                <span class="fw-bold" style="color:#e8a020;">{{ $row['quality'] }}</span>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
-            @endforeach
+        </div>
+
+        {{-- Bảng 2: Thiết bị thí nghiệm vật liệu --}}
+        <div data-aos="fade-up">
+            <h5 class="fw-bold mb-3" style="color:#0d1b2a;">
+                <i class="bi bi-flask me-2" style="color:#e8a020;"></i>Thiết bị thí nghiệm vật liệu & kiểm định công trình
+            </h5>
+            <div class="table-responsive rounded" style="border:1px solid #e9ecef;">
+                <table class="table table-hover mb-0" style="font-size:.875rem;">
+                    <thead style="background:#0d1b2a;color:#fff;">
+                        <tr>
+                            <th class="py-3 px-4">Tên thiết bị</th>
+                            <th class="py-3 px-3 text-center">Đơn vị</th>
+                            <th class="py-3 px-3 text-center">Số lượng</th>
+                            <th class="py-3 px-4">Chức năng sử dụng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background:#f8f9fa;">
+                            <td colspan="4" class="px-4 py-2 fw-bold" style="color:#0d1b2a;">I. Thiết bị kiểm tra kết cấu công trình</td>
+                        </tr>
+                        @foreach([
+                            ['name'=>'Máy siêu âm chiều dày lớp bê tông, bảo vệ đường kính cốt thép','unit'=>'Chiếc','qty'=>'01','func'=>'Kiểm tra đánh giá chất lượng kết cấu BTCT'],
+                            ['name'=>'Súng bật nẩy, máy siêu âm bê tông',                            'unit'=>'Chiếc','qty'=>'01','func'=>'Kiểm tra chất lượng bê tông'],
+                            ['name'=>'Máy siêu âm khuyết tật mối hàn',                               'unit'=>'Chiếc','qty'=>'01','func'=>'Kiểm tra chất lượng mối hàn'],
+                        ] as $row)
+                        <tr>
+                            <td class="px-4 py-2">{{ $row['name'] }}</td>
+                            <td class="px-3 py-2 text-center" style="color:#6c757d;">{{ $row['unit'] }}</td>
+                            <td class="px-3 py-2 text-center fw-bold" style="color:#0d1b2a;">{{ $row['qty'] }}</td>
+                            <td class="px-4 py-2" style="color:#6c757d;">{{ $row['func'] }}</td>
+                        </tr>
+                        @endforeach
+                        <tr style="background:#f8f9fa;">
+                            <td colspan="4" class="px-4 py-2 fw-bold" style="color:#0d1b2a;">II. Thiết bị thí nghiệm vật liệu xây dựng</td>
+                        </tr>
+                        @foreach([
+                            ['name'=>'Cân phân tích 0.001g',                'unit'=>'Chiếc','qty'=>'01','func'=>'Cân mẫu có trọng lượng < 200g'],
+                            ['name'=>'Máy thử thấm bê tông',                'unit'=>'Chiếc','qty'=>'05','func'=>'Thử thấm bê tông'],
+                            ['name'=>'Máy thử kéo nén WEW-1000B',           'unit'=>'Chiếc','qty'=>'02','func'=>'Thí nghiệm kéo nén'],
+                            ['name'=>'Máy nén',                             'unit'=>'Chiếc','qty'=>'03','func'=>'Xác định cường độ bê tông'],
+                            ['name'=>'Máy sàng, bộ sàng',                   'unit'=>'Chiếc','qty'=>'01','func'=>'Kiểm tra cốt liệu'],
+                            ['name'=>'Máy nén vữa TYA-300',                 'unit'=>'Chiếc','qty'=>'—', 'func'=>'Kiểm tra cường độ'],
+                            ['name'=>'Máy CBR',                             'unit'=>'Chiếc','qty'=>'01','func'=>'Kiểm tra nén mẫu CBR'],
+                            ['name'=>'Bộ dụng cụ thí nghiệm Bentonite',     'unit'=>'Bộ',   'qty'=>'02','func'=>'Thí nghiệm Bentonite'],
+                            ['name'=>'Thùng chưng hấp mẫu bê tông xi măng','unit'=>'Chiếc','qty'=>'01','func'=>'Bảo dưỡng bê tông mẫu'],
+                            ['name'=>'Máy khoan rút lõi bê tông',           'unit'=>'Chiếc','qty'=>'02','func'=>'Khoan rút lõi bê tông'],
+                            ['name'=>'Thiết bị chế tạo bê tông',            'unit'=>'Chiếc','qty'=>'01','func'=>'Chế tạo thử mẫu'],
+                        ] as $row)
+                        <tr>
+                            <td class="px-4 py-2">{{ $row['name'] }}</td>
+                            <td class="px-3 py-2 text-center" style="color:#6c757d;">{{ $row['unit'] }}</td>
+                            <td class="px-3 py-2 text-center fw-bold" style="color:#0d1b2a;">{{ $row['qty'] }}</td>
+                            <td class="px-4 py-2" style="color:#6c757d;">{{ $row['func'] }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <p class="mt-3" style="color:#adb5bd;font-size:.8rem;font-style:italic;">
+                * Trên đây là những thiết bị tiêu biểu. Công ty còn có thêm thiết bị chưa liệt kê và có thể liên kết, liên danh hợp tác cho các dự án lớn khi cần thiết.
+            </p>
         </div>
     </div>
 </section>
 
 {{-- ============================================================
-     7. CTA SECTION
+     6. MỘT SỐ HÌNH ẢNH HOẠT ĐỘNG
+     ============================================================ --}}
+<section style="padding:80px 0;background:#fff;">
+    <div class="container">
+        <div class="mb-5">
+            <span style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:#e8a020;">
+                Thực tế thi công
+            </span>
+            <h2 class="fw-bold mt-2" style="font-size:clamp(1.6rem,3vw,2.2rem);color:#0d1b2a;">
+                Hình Ảnh Hoạt Động
+            </h2>
+        </div>
+
+        <div class="row g-3">
+            <div class="col-md-7" data-aos="fade-right">
+                <div class="overflow-hidden rounded" style="height:420px;">
+                    <img src="{{ asset('images/Aspose.Words.4bc199bf-9f3d-489a-a241-0b9706d15e84.033.png') }}"
+                         alt="Thi công ép cọc Thành Nam" class="w-100 h-100" style="object-fit:cover;transition:transform .4s;"
+                         onmouseover="this.style.transform='scale(1.04)'"
+                         onmouseout="this.style.transform='scale(1)'">
+                </div>
+            </div>
+            <div class="col-md-5 d-flex flex-column gap-3" data-aos="fade-left">
+                <div class="overflow-hidden rounded flex-grow-1" style="height:200px;">
+                    <img src="{{ asset('images/Aspose.Words.4bc199bf-9f3d-489a-a241-0b9706d15e84.034.png') }}"
+                         alt="Công trình nền móng Thành Nam" class="w-100 h-100" style="object-fit:cover;transition:transform .4s;"
+                         onmouseover="this.style.transform='scale(1.04)'"
+                         onmouseout="this.style.transform='scale(1)'">
+                </div>
+                <div class="overflow-hidden rounded flex-grow-1" style="height:200px;">
+                    <img src="{{ asset('images/Aspose.Words.4bc199bf-9f3d-489a-a241-0b9706d15e84.035.png') }}"
+                         alt="Hoạt động thi công Thành Nam" class="w-100 h-100" style="object-fit:cover;transition:transform .4s;"
+                         onmouseover="this.style.transform='scale(1.04)'"
+                         onmouseout="this.style.transform='scale(1)'">
+                </div>
+            </div>
+        </div>
+
+        {{-- 4th image full width --}}
+        <div class="row g-3 mt-0" data-aos="fade-up">
+            <div class="col-12">
+                <div class="overflow-hidden rounded">
+                    <img src="{{ asset('images/Aspose.Words.4bc199bf-9f3d-489a-a241-0b9706d15e84.036.jpeg') }}"
+                         alt="Ép cọc bê tông Thành Nam" class="w-100 h-100"
+                         style="object-fit:cover;object-position:center 30%;transition:transform .4s;"
+                         onmouseover="this.style.transform='scale(1.02)'"
+                         onmouseout="this.style.transform='scale(1)'">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{-- ============================================================
+     8. CTA
      ============================================================ --}}
 <section style="padding:80px 0;background:#f8f9fa;">
     <div class="container">
-        <div class="rounded-3 text-center text-white p-5 p-md-6"
+        <div class="rounded-3 text-center text-white p-5"
              style="background:#0d1b2a;padding:80px 40px !important;"
              data-aos="fade-up">
             <span style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:#e8a020;display:block;margin-bottom:1rem;">
                 Bắt đầu ngay
             </span>
             <h2 class="fw-bold mb-3" style="font-size:clamp(1.6rem,3vw,2.2rem);">
-                Sẵn Sàng Xây Dựng Tương Lai?
+                Sẵn Sàng Hợp Tác Cùng Chúng Tôi?
             </h2>
             <p style="color:rgba(255,255,255,.6);max-width:480px;margin:0 auto 2.5rem;line-height:1.7;">
-                Hãy chia sẻ dự án của bạn với chúng tôi. Đội ngũ chuyên gia sẽ tư vấn giải pháp tối ưu nhất cho công trình của bạn.
+                Liên hệ ngay để được tư vấn giải pháp nền móng và thi công phù hợp nhất cho công trình của bạn.
             </p>
             <div class="d-flex gap-3 justify-content-center flex-wrap">
                 <a href="{{ route('contact.index') }}"
                    class="btn btn-lg fw-semibold px-5"
                    style="background:transparent;color:#fff;border:2px solid rgba(255,255,255,.3);border-radius:6px;">
                     Liên hệ tư vấn
+                </a>
+                <a href="{{ asset('pdf/ho-so-nang-luc.pdf') }}"
+                   download
+                   class="btn btn-lg fw-semibold px-5 d-inline-flex align-items-center gap-2"
+                   style="background:#e8a020;color:#fff;border:2px solid #e8a020;border-radius:6px;">
+                    <i class="bi bi-download"></i> Tải hồ sơ năng lực
                 </a>
             </div>
         </div>
