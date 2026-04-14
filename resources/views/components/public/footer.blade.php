@@ -42,6 +42,18 @@
                     @endif
                     @endforeach
                 </div>
+
+                {{-- Download profile --}}
+                <div class="mt-3">
+                    <a href="{{ asset('pdf/ho-so-nang-luc.pdf') }}"
+                       download
+                       class="d-inline-flex align-items-center gap-2 text-decoration-none fw-semibold px-3 py-2 rounded"
+                       style="background:#e8a020;color:#fff;font-size:.8rem;transition:.2s;"
+                       onmouseover="this.style.background='#cf8c18'"
+                       onmouseout="this.style.background='#e8a020'">
+                        <i class="bi bi-download"></i> Tải hồ sơ năng lực
+                    </a>
+                </div>
             </div>
 
             {{-- Cột 2: Dịch vụ --}}
