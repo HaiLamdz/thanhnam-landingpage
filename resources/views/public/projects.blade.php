@@ -78,7 +78,7 @@ $remaining  = $projects->skip(4);
                     </a>
                     @foreach($services as $i => $service)
                     <a href="{{ route('projects.index', ['service' => $service->id]) }}"
-                       class="btn btn-sm fw-semibold px-3 filter-pill-extra {{ $i >= 0 ? 'd-none' : '' }}"
+                       class="btn btn-sm fw-semibold px-3 filter-pill-extra {{ ($i >= 5 && !request('service')) ? 'd-none' : '' }}"
                        style="background:{{ request('service') == $service->id ? '#0d1b2a' : '#fff' }};color:{{ request('service') == $service->id ? '#fff' : '#6c757d' }};border:1px solid {{ request('service') == $service->id ? '#0d1b2a' : '#dee2e6' }};border-radius:20px;font-size:.8rem;white-space:nowrap;">
                         {{ $service->title }}
                     </a>
@@ -86,7 +86,7 @@ $remaining  = $projects->skip(4);
 
                     @if($services->count() > 5)
                     <button type="button" id="showMoreFilters"
-                            class="btn btn-sm fw-semibold px-3"
+                            class="btn btn-sm fw-semibold px-3 {{ request('service') ? 'd-none' : '' }}"
                             style="background:#fff;color:#e8a020;border:1px solid #e8a020;border-radius:20px;font-size:.8rem;white-space:nowrap;">
                         + Xem thêm
                     </button>

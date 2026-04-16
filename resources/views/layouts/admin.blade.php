@@ -10,7 +10,7 @@
         body { background: #f8f9fa; }
         .sidebar { width: 240px; min-height: 100vh; background: #1a1a2e; position: fixed; top: 0; left: 0; z-index: 100; }
         .sidebar .brand { padding: 1.25rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,.1); }
-        .sidebar .nav-link { color: rgba(255,255,255,.7); padding: .6rem 1.5rem; font-size: .875rem; }
+        .sidebar .nav-link { color: rgba(255,255,255,.7); padding: .6rem 1.5rem; font-size: 1.10rem; }
         .sidebar .nav-link:hover, .sidebar .nav-link.active { color: #fff; background: rgba(255,255,255,.08); }
         .sidebar .nav-link i { width: 20px; }
         .main-content { margin-left: 240px; }

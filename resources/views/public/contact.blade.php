@@ -107,13 +107,17 @@
             {{-- Right: Form --}}
             <div class="col-lg-8" data-aos="fade-left">
                 <div class="p-4 p-md-5 rounded-3" style="background:#fff;box-shadow:0 4px 24px rgba(0,0,0,.06);">
-                    <form action="{{ route('contact.store') }}" method="POST" novalidate>
+                    <style>
+                        .contact-form ::placeholder { color: #ced4da; opacity: 1; }
+                        .contact-form ::-ms-input-placeholder { color: #ced4da; }
+                    </style>
+                    <form action="{{ route('contact.store') }}" method="POST" novalidate class="contact-form">
                         @csrf
                         <div class="row g-3">
 
                             {{-- Row 1: Name + Email --}}
                             <div class="col-md-6">
-                                <label class="form-label" style="font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#adb5bd;">
+                                <label class="form-label" style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#0d1b2a;">
                                     Họ và tên
                                 </label>
                                 <input type="text" name="name" value="{{ old('name') }}"
@@ -124,7 +128,7 @@
                                 <div class="invalid-feedback">@error('name'){{ $message }}@else Vui lòng nhập họ tên.@enderror</div>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label" style="font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#adb5bd;">
+                                <label class="form-label" style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#0d1b2a;">
                                     Địa chỉ email
                                 </label>
                                 <input type="email" name="email" value="{{ old('email') }}"
@@ -137,7 +141,7 @@
 
                             {{-- Row 2: Service + Budget --}}
                             <div class="col-md-6">
-                                <label class="form-label" style="font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#adb5bd;">
+                                <label class="form-label" style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#0d1b2a;">
                                     Dịch vụ quan tâm
                                 </label>
                                 <select name="subject" class="form-select @error('subject') is-invalid @enderror"
@@ -154,7 +158,7 @@
                                 <div class="invalid-feedback">@error('subject'){{ $message }}@else Vui lòng chọn dịch vụ.@enderror</div>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label" style="font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#adb5bd;">
+                                <label class="form-label" style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#0d1b2a;">
                                     Ngân sách dự kiến
                                 </label>
                                 <input type="text" name="budget" value="{{ old('budget') }}"
@@ -165,7 +169,7 @@
 
                             {{-- Row 3: Message --}}
                             <div class="col-12">
-                                <label class="form-label" style="font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#adb5bd;">
+                                <label class="form-label" style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#0d1b2a;">
                                     Tổng quan dự án
                                 </label>
                                 <textarea name="message" rows="5"
