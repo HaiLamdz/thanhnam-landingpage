@@ -191,8 +191,9 @@ class SampleDataSeeder extends Seeder
             ],
         ];
 
+        $createdProjects = [];
         foreach ($projects as $i => $data) {
-            Project::create([
+            $project = Project::create([
                 'title'       => $data['title'],
                 'description' => $data['description'],
                 'client'      => $data['client'],
@@ -200,6 +201,15 @@ class SampleDataSeeder extends Seeder
                 'image_path'  => null,
                 'status'      => 'published',
             ]);
+            $createdProjects[] = $project;
+        }
+
+        // Attach services to projects
+        $services = Service::all();
+        foreach ($createdProjects as $project) {
+            // Randomly attach 1-3 services to each project
+            $randomServices = $services->random(rand(1, 3));
+            $project->services()->attach($randomServices->pluck('id'));
         }
     }
 }

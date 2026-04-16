@@ -4,17 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Project extends Model
+class ActivityArea extends Model
 {
     protected $fillable = [
         'title',
         'description',
-        'body',
-        'client',
-        'location',
-        'category',
-        'completion_status',
-        'image_path',
+        'icon',
+        'sort_order',
         'status',
     ];
 
@@ -23,8 +19,8 @@ class Project extends Model
         return $query->where('status', 'published');
     }
 
-    public function services()
+    public function scopeOrdered($query)
     {
-        return $this->belongsToMany(Service::class)->withTimestamps();
+        return $query->orderBy('sort_order');
     }
 }

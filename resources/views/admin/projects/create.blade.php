@@ -103,10 +103,20 @@
                         @error('category')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                     <div class="mb-3">
-                        <label class="form-label fw-medium">Dịch vụ</label>
-                        <input type="text" name="services" class="form-control @error('services') is-invalid @enderror"
-                            value="{{ old('services') }}" placeholder="Thi công, Giám sát, Tư vấn...">
-                        @error('services')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                        <label class="form-label fw-medium">Dịch vụ liên quan</label>
+                        <div class="row g-2">
+                            @foreach($services as $service)
+                                <div class="col-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="services[]" value="{{ $service->id }}" id="service{{ $service->id }}">
+                                        <label class="form-check-label" for="service{{ $service->id }}">
+                                            {{ $service->title }}
+                                        </label>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                        @error('services')<div class="invalid-feedback d-block">{{ $message }}</div>@enderror
                     </div>
                     <div class="mb-0">
                         <label class="form-label fw-medium">Trạng thái hoàn thành</label>

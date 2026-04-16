@@ -57,34 +57,57 @@ $remaining  = $projects->skip(4);
      ============================================================ --}}
 <section style="background:#f4f5f7;padding:60px 0 40px;">
     <div class="container">
-        <div class="d-flex align-items-start justify-content-between flex-wrap gap-4" data-aos="fade-up">
+        <div data-aos="fade-up">
+            <span style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:#e8a020;display:block;margin-bottom:.75rem;">
+                DANH MỤC DỰ ÁN
+            </span>
+            <h2 class="fw-bold mb-2" style="font-size:clamp(1.6rem,3vw,2.2rem);color:#0d1b2a;">
+                Xây Dựng Vì Hiệu Suất
+            </h2>
+            <p style="color:#6c757d;font-size:.95rem;line-height:1.7;max-width:520px;margin:0 0 1.5rem;">
+                Mỗi dự án là minh chứng cho cam kết của chúng tôi về chất lượng kỹ thuật, đổi mới sáng tạo và xây dựng bền vững.
+            </p>
+
+            {{-- Filter pills --}}
             <div>
-                <span style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:#e8a020;display:block;margin-bottom:.75rem;">
-                    DANH MỤC DỰ ÁN
-                </span>
-                <h2 class="fw-bold mb-2" style="font-size:clamp(1.6rem,3vw,2.2rem);color:#0d1b2a;">
-                    Xây Dựng Vì Hiệu Suất
-                </h2>
-                <p style="color:#6c757d;font-size:.95rem;line-height:1.7;max-width:520px;margin:0;">
-                    Mỗi dự án là minh chứng cho cam kết của chúng tôi về chất lượng kỹ thuật, đổi mới sáng tạo và xây dựng bền vững.
-                </p>
-            </div>
-            <div class="d-flex align-items-end pb-1">
-                <div class="d-flex gap-2 flex-wrap">
+                <div class="d-flex gap-2 flex-wrap" id="filterPills">
                     <a href="{{ route('projects.index') }}"
                        class="btn btn-sm fw-semibold px-3"
-                       style="background:#0d1b2a;color:#fff;border-radius:20px;font-size:.8rem;">
+                       style="background:{{ !request('service') ? '#0d1b2a' : '#fff' }};color:{{ !request('service') ? '#fff' : '#6c757d' }};border:1px solid {{ !request('service') ? '#0d1b2a' : '#dee2e6' }};border-radius:20px;font-size:.8rem;white-space:nowrap;">
                         Tất cả
                     </a>
-                    @foreach(['Hạ tầng','Thương mại','Công nghiệp','Nền móng'] as $cat)
-                    <a href="#"
-                       class="btn btn-sm fw-semibold px-3"
-                       style="background:#fff;color:#6c757d;border:1px solid #dee2e6;border-radius:20px;font-size:.8rem;">
-                        {{ $cat }}
+                    @foreach($services as $i => $service)
+                    <a href="{{ route('projects.index', ['service' => $service->id]) }}"
+                       class="btn btn-sm fw-semibold px-3 filter-pill-extra {{ $i >= 0 ? 'd-none' : '' }}"
+                       style="background:{{ request('service') == $service->id ? '#0d1b2a' : '#fff' }};color:{{ request('service') == $service->id ? '#fff' : '#6c757d' }};border:1px solid {{ request('service') == $service->id ? '#0d1b2a' : '#dee2e6' }};border-radius:20px;font-size:.8rem;white-space:nowrap;">
+                        {{ $service->title }}
                     </a>
                     @endforeach
+
+                    @if($services->count() > 5)
+                    <button type="button" id="showMoreFilters"
+                            class="btn btn-sm fw-semibold px-3"
+                            style="background:#fff;color:#e8a020;border:1px solid #e8a020;border-radius:20px;font-size:.8rem;white-space:nowrap;">
+                        + Xem thêm
+                    </button>
+                    @endif
                 </div>
             </div>
+
+            <script>
+                (function() {
+                    var btn = document.getElementById('showMoreFilters');
+                    if (!btn) return;
+                    var expanded = false;
+                    btn.addEventListener('click', function() {
+                        expanded = !expanded;
+                        document.querySelectorAll('.filter-pill-extra').forEach(function(el) {
+                            el.classList.toggle('d-none', !expanded);
+                        });
+                        btn.textContent = expanded ? '− Thu lại' : '+ Xem thêm';
+                    });
+                })();
+            </script>
         </div>
     </div>
 </section>
@@ -271,9 +294,6 @@ $remaining  = $projects->skip(4);
             ] as $step)
             <div class="col-md-3 col-sm-6" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                 <div class="text-center p-4">
-                    <div class="mb-3" style="font-size:.75rem;font-weight:700;color:rgba(255,255,255,.25);letter-spacing:2px;">
-                        {{ $step['num'] }}
-                    </div>
                     <div class="d-flex align-items-center justify-content-center rounded-circle mx-auto mb-3"
                          style="width:60px;height:60px;background:rgba(232,160,32,.15);border:1px solid rgba(232,160,32,.3);">
                         <i class="bi {{ $step['icon'] }}" style="color:#e8a020;font-size:1.3rem;"></i>

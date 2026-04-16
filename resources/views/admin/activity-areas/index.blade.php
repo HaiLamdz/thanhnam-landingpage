@@ -1,21 +1,19 @@
 @extends('layouts.admin')
 
-@section('title', 'Dịch vụ')
+@section('title', 'Lĩnh vực hoạt động')
 
 @section('content')
 <div class="d-flex align-items-center justify-content-between mb-4">
-    <h4 class="mb-0">Dịch vụ</h4>
-    <a href="{{ route('admin.services.create') }}" class="btn btn-primary btn-sm">
-        <i class="bi bi-plus-lg me-1"></i> Thêm dịch vụ
+    <h4 class="mb-0">Lĩnh vực hoạt động</h4>
+    <a href="{{ route('admin.activity-areas.create') }}" class="btn btn-primary btn-sm">
+        <i class="bi bi-plus-lg me-1"></i> Thêm lĩnh vực
     </a>
 </div>
 
-{{-- Search bar --}}
-<form method="GET" action="{{ route('admin.services.index') }}" class="mb-4">
+<form method="GET" action="{{ route('admin.activity-areas.index') }}" class="mb-4">
     <div class="row g-2 align-items-end">
         <div class="col-md-6">
-            <input type="text" name="q" value="{{ request('q') }}"
-                   class="form-control" placeholder="Tìm kiếm theo tiêu đề...">
+            <input type="text" name="q" value="{{ request('q') }}" class="form-control" placeholder="Tìm kiếm theo tiêu đề...">
         </div>
         <div class="col-md-3">
             <select name="status" class="form-select">
@@ -29,7 +27,7 @@
                 <i class="bi bi-search me-1"></i> Tìm
             </button>
             @if(request('q') || request('status'))
-            <a href="{{ route('admin.services.index') }}" class="btn btn-outline-secondary">
+            <a href="{{ route('admin.activity-areas.index') }}" class="btn btn-outline-secondary">
                 <i class="bi bi-x-lg"></i>
             </a>
             @endif
@@ -44,39 +42,31 @@
                 <tr>
                     <th>Tiêu đề</th>
                     <th>Trạng thái</th>
-                    <th>Nổi bật</th>
                     <th>Thứ tự</th>
                     <th class="text-end">Thao tác</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse($services as $service)
+                @forelse($activityAreas as $area)
                 <tr>
                     <td>
-                        <div class="fw-medium">{{ $service->title }}</div>
-                        <small class="text-muted">{{ $service->slug }}</small>
+                        <div class="fw-medium">{{ $area->title }}</div>
+                        <small class="text-muted">{{ Str::limit($area->description, 80) }}</small>
                     </td>
                     <td>
-                        @if($service->status === 'published')
+                        @if($area->status === 'published')
                             <span class="badge bg-success">Đã xuất bản</span>
                         @else
                             <span class="badge bg-secondary">Nháp</span>
                         @endif
                     </td>
-                    <td>
-                        @if($service->featured)
-                            <span class="badge bg-warning">Nổi bật</span>
-                        @else
-                            <span class="badge bg-light text-dark">Thường</span>
-                        @endif
-                    </td>
-                    <td>{{ $service->sort_order }}</td>
+                    <td>{{ $area->sort_order }}</td>
                     <td class="text-end">
-                        <a href="{{ route('admin.services.edit', $service) }}" class="btn btn-sm btn-outline-primary me-1">
+                        <a href="{{ route('admin.activity-areas.edit', $area) }}" class="btn btn-sm btn-outline-primary me-1">
                             <i class="bi bi-pencil"></i>
                         </a>
-                        <form method="POST" action="{{ route('admin.services.destroy', $service) }}" class="d-inline"
-                              onsubmit="return confirm('Bạn có chắc muốn xóa dịch vụ này?')">
+                        <form method="POST" action="{{ route('admin.activity-areas.destroy', $area) }}" class="d-inline"
+                              onsubmit="return confirm('Bạn có chắc muốn xóa lĩnh vực này?')">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-outline-danger">
@@ -87,7 +77,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="5" class="text-center text-muted py-4">Chưa có dịch vụ nào.</td>
+                    <td colspan="4" class="text-center text-muted py-4">Chưa có lĩnh vực hoạt động nào.</td>
                 </tr>
                 @endforelse
             </tbody>
@@ -95,7 +85,7 @@
     </div>
 </div>
 
-@if($services->hasPages())
-<div class="mt-3">{{ $services->links() }}</div>
+@if($activityAreas->hasPages())
+<div class="mt-3">{{ $activityAreas->links() }}</div>
 @endif
 @endsection

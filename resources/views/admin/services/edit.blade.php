@@ -36,17 +36,21 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label class="form-label fw-medium">Icon (CSS class)</label>
-                    <input type="text" name="icon" class="form-control @error('icon') is-invalid @enderror"
-                        value="{{ old('icon', $service->icon) }}" placeholder="bi bi-gear">
-                    @error('icon')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                </div>
-                <div class="col-md-6 mb-3">
+                <div class="col-md-12 mb-3">
                     <label class="form-label fw-medium">Thứ tự hiển thị</label>
                     <input type="number" name="sort_order" class="form-control @error('sort_order') is-invalid @enderror"
                         value="{{ old('sort_order', $service->sort_order) }}">
                     @error('sort_order')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <div class="form-check">
+                    <input type="checkbox" name="featured" class="form-check-input" id="featured" value="1"
+                        {{ old('featured', $service->featured) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="featured">
+                        Dịch vụ nổi bật
+                    </label>
                 </div>
             </div>
 

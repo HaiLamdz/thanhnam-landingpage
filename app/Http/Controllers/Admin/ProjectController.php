@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProjectRequest;
 use App\Models\Project;
+use App\Models\Service;
 use App\Services\ImageService;
 
 class ProjectController extends Controller
@@ -32,28 +33,37 @@ class ProjectController extends Controller
 
     public function create()
     {
-        return view('admin.projects.create');
+        $services = Service::published()->ordered()->get();
+        return view('admin.projects.create', compact('services'));
     }
 
     public function store(StoreProjectRequest $request)
     {
         $data = $request->validated();
+        $services = $data['services'] ?? [];
+        unset($data['services']);
+
         $data['image_path'] = $this->imageService->store($request->file('image'), 'projects');
         unset($data['image']);
 
-        Project::create($data);
+        $project = Project::create($data);
+        $project->services()->attach($services);
 
         return redirect()->route('admin.projects.index')->with('success', 'Dự án đã được tạo thành công.');
     }
 
     public function edit(Project $project)
     {
-        return view('admin.projects.edit', compact('project'));
+        $project->load('services');
+        $services = Service::published()->ordered()->get();
+        return view('admin.projects.edit', compact('project', 'services'));
     }
 
     public function update(StoreProjectRequest $request, Project $project)
     {
         $data = $request->validated();
+        $services = $data['services'] ?? [];
+        unset($data['services']);
 
         if ($request->hasFile('image')) {
             $this->imageService->delete($project->image_path);
@@ -63,6 +73,7 @@ class ProjectController extends Controller
         unset($data['image']);
 
         $project->update($data);
+        $project->services()->sync($services);
 
         return redirect()->route('admin.projects.index')->with('success', 'Dự án đã được cập nhật thành công.');
     }
