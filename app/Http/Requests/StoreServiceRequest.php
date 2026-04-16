@@ -21,6 +21,7 @@ class StoreServiceRequest extends FormRequest
             'body'       => 'nullable',
             'icon'       => 'nullable|max:100',
             'sort_order' => 'nullable|integer',
+            'featured'   => 'nullable|boolean',
         ];
     }
 }

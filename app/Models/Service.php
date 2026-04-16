@@ -15,11 +15,13 @@ class Service extends Model
         'image_path',
         'status',
         'sort_order',
+        'featured',
     ];
 
     protected $casts = [
         'status'     => 'string',
         'sort_order' => 'integer',
+        'featured'   => 'boolean',
     ];
 
     public function scopePublished($query)
@@ -27,8 +29,18 @@ class Service extends Model
         return $query->where('status', 'published');
     }
 
+    public function scopeFeatured($query)
+    {
+        return $query->where('featured', true);
+    }
+
     public function scopeOrdered($query)
     {
         return $query->orderBy('sort_order');
+    }
+
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class)->withTimestamps();
     }
 }

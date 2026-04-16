@@ -158,46 +158,23 @@
         </div>
 
         <div class="d-flex flex-column gap-0">
-            @foreach([
-                [
-                    'num' => '01',
-                    'title' => 'Thi công ép cọc bê tông',
-                    'desc' => 'Thi công nền móng công trình các loại. Sản xuất và thi công ép cọc bê tông cốt thép (200×200, 250×250, 300×300, 400×400 mm). Sản xuất và thi công ép cọc bê tông ly tâm dự ứng lực (D300, D400, D500, D600 mm). Cho thuê máy khoan cọc nhồi và Robot thi công ép cọc từ 100 đến 680 tấn.',
-                    'icon' => 'bi-hammer'
-                ],
-                [
-                    'num' => '02',
-                    'title' => 'Kiểm tra & tư vấn nền móng công trình',
-                    'desc' => 'Thí nghiệm sức chịu tải cọc bằng phương pháp ép tĩnh dọc trục, nhổ dọc trục, đẩy ngang, siêu âm, PDA, PIT. Kiểm tra nền đất bằng phương pháp xác định Modun biến dạng tấm nén phẳng. Khoan khảo sát địa chất công trình.',
-                    'icon' => 'bi-search'
-                ],
-                [
-                    'num' => '03',
-                    'title' => 'Xây dựng công trình',
-                    'desc' => 'Cung cấp và ép các loại cọc bê tông cốt thép, bê tông dự ứng lực. Xây dựng các công trình nhà văn hóa, trường học, thủy lợi và hạ tầng kỹ thuật.',
-                    'icon' => 'bi-building'
-                ],
-                [
-                    'num' => '04',
-                    'title' => 'Thí nghiệm vật liệu xây dựng',
-                    'desc' => 'Thí nghiệm vật liệu xây dựng dân dụng tại phòng thí nghiệm và ngoài hiện trường. Thí nghiệm vật liệu chuyên ngành cầu đường. Được Bộ Xây dựng cấp phép hoạt động thí nghiệm chuyên ngành xây dựng LAXD 1780 (cấp ngày 25/06/2021).',
-                    'icon' => 'bi-clipboard-data'
-                ],
-            ] as $i => $svc)
+            @forelse($activityAreas as $i => $area)
             <div class="d-flex align-items-start gap-4 py-4 {{ $i > 0 ? 'border-top' : '' }}"
                  style="border-color:#e9ecef !important;"
                  data-aos="fade-up" data-aos-delay="{{ $i * 80 }}">
                 <div class="fw-bold flex-shrink-0" style="font-size:1.5rem;color:#e9ecef;min-width:48px;">
-                    {{ $svc['num'] }}
+                    {{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}
                 </div>
                 <div class="flex-grow-1">
                     <h5 class="fw-bold mb-2" style="color:#0d1b2a;">
-                        <i class="bi {{ $svc['icon'] }} me-2" style="color:#e8a020;"></i>{{ $svc['title'] }}
+                        <i class="bi {{ $area->icon ?? 'bi-briefcase' }} me-2" style="color:#e8a020;"></i>{{ $area->title }}
                     </h5>
-                    <p class="mb-0" style="color:#6c757d;font-size:.9rem;line-height:1.7;">{{ $svc['desc'] }}</p>
+                    <p class="mb-0" style="color:#6c757d;font-size:.9rem;line-height:1.7;">{{ $area->description }}</p>
                 </div>
             </div>
-            @endforeach
+            @empty
+            <p class="text-center text-muted">Thông tin đang được cập nhật.</p>
+            @endforelse
         </div>
     </div>
 </section>
@@ -262,122 +239,71 @@
             </h2>
         </div>
 
-        {{-- Bảng 1: Thiết bị nền móng --}}
-        <div class="mb-5" data-aos="fade-up">
-            <h5 class="fw-bold mb-3" style="color:#0d1b2a;">
-                <i class="bi bi-gear-fill me-2" style="color:#e8a020;"></i>Thiết bị hoạt động lĩnh vực nền móng, địa chất công trình
-            </h5>
-            <div class="table-responsive rounded" style="border:1px solid #e9ecef;">
-                <table class="table table-hover mb-0" style="font-size:.875rem;">
-                    <thead style="background:#0d1b2a;color:#fff;">
-                        <tr>
-                            <th class="py-3 px-4">Thiết bị</th>
-                            <th class="py-3 px-3 text-center">Công suất</th>
-                            <th class="py-3 px-3 text-center">Số lượng</th>
-                            <th class="py-3 px-3 text-center">Chất lượng còn lại</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach([
-                            ['name'=>'Máy robot ép cọc (sản xuất tại Trung Quốc)',          'power'=>'320, 420, 680 tấn', 'qty'=>'15',       'quality'=>'92%'],
-                            ['name'=>'Kích thủy lực KN1000 (sản xuất tại Mỹ)',              'power'=>'1.000 tấn',         'qty'=>'02',       'quality'=>'97%'],
-                            ['name'=>'Cẩu Kato (sản xuất tại Nhật)',                        'power'=>'25 tấn',            'qty'=>'01',       'quality'=>'85%'],
-                            ['name'=>'Máy khoan địa chất XY-1, XY1A-4',                    'power'=>'—',                 'qty'=>'05',       'quality'=>'90%'],
-                            ['name'=>'Kích thủy lực KN800, 500, 300, 200, 100 (TQ, VN)',   'power'=>'800 tấn',           'qty'=>'20',       'quality'=>'95%'],
-                            ['name'=>'Máy phát điện (sản xuất tại Nhật Bản)',               'power'=>'5–15 kW',           'qty'=>'05',       'quality'=>'95%'],
-                            ['name'=>'Máy toàn đạc điện tử Nikon DTM-350 (Nhật Bản)',      'power'=>'—',                 'qty'=>'05',       'quality'=>'95%'],
-                            ['name'=>'Máy thủy chuẩn AL 32 (sản xuất tại Nhật Bản)',       'power'=>'—',                 'qty'=>'05',       'quality'=>'95%'],
-                            ['name'=>'Đối trọng đúc sẵn (sản xuất tại Việt Nam)',           'power'=>'—',                 'qty'=>'2.000 tấn','quality'=>'95%'],
-                            ['name'=>'Dầm chính I (sản xuất tại Việt Nam)',                 'power'=>'—',                 'qty'=>'20',       'quality'=>'99%'],
-                            ['name'=>'Dầm phụ I (sản xuất tại Việt Nam)',                   'power'=>'—',                 'qty'=>'10',       'quality'=>'99%'],
-                            ['name'=>'Tôn gối kê (sản xuất tại Việt Nam)',                  'power'=>'—',                 'qty'=>'10',       'quality'=>'98%'],
-                            ['name'=>'Đồng hồ áp suất (sản xuất tại Trung Quốc)',           'power'=>'60 MPa',            'qty'=>'15',       'quality'=>'99%'],
-                            ['name'=>'Đồng hồ đo lún (sản xuất tại Trung Quốc)',            'power'=>'50 mm',             'qty'=>'30',       'quality'=>'99%'],
-                            ['name'=>'Máy PDA (sản xuất tại Trung Quốc)',                   'power'=>'—',                 'qty'=>'02',       'quality'=>'99%'],
-                            ['name'=>'Máy PIT',                                             'power'=>'—',                 'qty'=>'04',       'quality'=>'98%'],
-                        ] as $row)
-                        <tr>
-                            <td class="px-4 py-2">{{ $row['name'] }}</td>
-                            <td class="px-3 py-2 text-center" style="color:#6c757d;">{{ $row['power'] }}</td>
-                            <td class="px-3 py-2 text-center fw-bold" style="color:#0d1b2a;">{{ $row['qty'] }}</td>
-                            <td class="px-3 py-2 text-center">
-                                <span class="fw-bold" style="color:#e8a020;">{{ $row['quality'] }}</span>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        @php
+            $equipmentGroups = $equipments->groupBy('category');
+        @endphp
 
-        {{-- Bảng 2: Thiết bị thí nghiệm vật liệu --}}
-        <div data-aos="fade-up">
-            <h5 class="fw-bold mb-3" style="color:#0d1b2a;">
-                <i class="bi bi-flask me-2" style="color:#e8a020;"></i>Thiết bị thí nghiệm vật liệu & kiểm định công trình
-            </h5>
-            <div class="table-responsive rounded" style="border:1px solid #e9ecef;">
-                <table class="table table-hover mb-0" style="font-size:.875rem;">
-                    <thead style="background:#0d1b2a;color:#fff;">
-                        <tr>
-                            <th class="py-3 px-4">Tên thiết bị</th>
-                            <th class="py-3 px-3 text-center">Đơn vị</th>
-                            <th class="py-3 px-3 text-center">Số lượng</th>
-                            <th class="py-3 px-4">Chức năng sử dụng</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr style="background:#f8f9fa;">
-                            <td colspan="4" class="px-4 py-2 fw-bold" style="color:#0d1b2a;">I. Thiết bị kiểm tra kết cấu công trình</td>
-                        </tr>
-                        @foreach([
-                            ['name'=>'Máy siêu âm chiều dày lớp bê tông, bảo vệ đường kính cốt thép','unit'=>'Chiếc','qty'=>'01','func'=>'Kiểm tra đánh giá chất lượng kết cấu BTCT'],
-                            ['name'=>'Súng bật nẩy, máy siêu âm bê tông',                            'unit'=>'Chiếc','qty'=>'01','func'=>'Kiểm tra chất lượng bê tông'],
-                            ['name'=>'Máy siêu âm khuyết tật mối hàn',                               'unit'=>'Chiếc','qty'=>'01','func'=>'Kiểm tra chất lượng mối hàn'],
-                        ] as $row)
-                        <tr>
-                            <td class="px-4 py-2">{{ $row['name'] }}</td>
-                            <td class="px-3 py-2 text-center" style="color:#6c757d;">{{ $row['unit'] }}</td>
-                            <td class="px-3 py-2 text-center fw-bold" style="color:#0d1b2a;">{{ $row['qty'] }}</td>
-                            <td class="px-4 py-2" style="color:#6c757d;">{{ $row['func'] }}</td>
-                        </tr>
-                        @endforeach
-                        <tr style="background:#f8f9fa;">
-                            <td colspan="4" class="px-4 py-2 fw-bold" style="color:#0d1b2a;">II. Thiết bị thí nghiệm vật liệu xây dựng</td>
-                        </tr>
-                        @foreach([
-                            ['name'=>'Cân phân tích 0.001g',                'unit'=>'Chiếc','qty'=>'01','func'=>'Cân mẫu có trọng lượng < 200g'],
-                            ['name'=>'Máy thử thấm bê tông',                'unit'=>'Chiếc','qty'=>'05','func'=>'Thử thấm bê tông'],
-                            ['name'=>'Máy thử kéo nén WEW-1000B',           'unit'=>'Chiếc','qty'=>'02','func'=>'Thí nghiệm kéo nén'],
-                            ['name'=>'Máy nén',                             'unit'=>'Chiếc','qty'=>'03','func'=>'Xác định cường độ bê tông'],
-                            ['name'=>'Máy sàng, bộ sàng',                   'unit'=>'Chiếc','qty'=>'01','func'=>'Kiểm tra cốt liệu'],
-                            ['name'=>'Máy nén vữa TYA-300',                 'unit'=>'Chiếc','qty'=>'—', 'func'=>'Kiểm tra cường độ'],
-                            ['name'=>'Máy CBR',                             'unit'=>'Chiếc','qty'=>'01','func'=>'Kiểm tra nén mẫu CBR'],
-                            ['name'=>'Bộ dụng cụ thí nghiệm Bentonite',     'unit'=>'Bộ',   'qty'=>'02','func'=>'Thí nghiệm Bentonite'],
-                            ['name'=>'Thùng chưng hấp mẫu bê tông xi măng','unit'=>'Chiếc','qty'=>'01','func'=>'Bảo dưỡng bê tông mẫu'],
-                            ['name'=>'Máy khoan rút lõi bê tông',           'unit'=>'Chiếc','qty'=>'02','func'=>'Khoan rút lõi bê tông'],
-                            ['name'=>'Thiết bị chế tạo bê tông',            'unit'=>'Chiếc','qty'=>'01','func'=>'Chế tạo thử mẫu'],
-                        ] as $row)
-                        <tr>
-                            <td class="px-4 py-2">{{ $row['name'] }}</td>
-                            <td class="px-3 py-2 text-center" style="color:#6c757d;">{{ $row['unit'] }}</td>
-                            <td class="px-3 py-2 text-center fw-bold" style="color:#0d1b2a;">{{ $row['qty'] }}</td>
-                            <td class="px-4 py-2" style="color:#6c757d;">{{ $row['func'] }}</td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+        @forelse($equipmentGroups as $category => $items)
+            <div class="mb-5" data-aos="fade-up">
+                <h5 class="fw-bold mb-3" style="color:#0d1b2a;">
+                    <i class="bi bi-gear-fill me-2" style="color:#e8a020;"></i>{{ $category }}
+                </h5>
+                <div class="table-responsive rounded" style="border:1px solid #e9ecef;">
+                    <table class="table table-hover mb-0" style="font-size:.875rem;">
+                        <thead style="background:#0d1b2a;color:#fff;">
+                            <tr>
+                                <th class="py-3 px-4">Tên thiết bị</th>
+                                @if($items->first()->quality)
+                                    <th class="py-3 px-3 text-center">Công suất</th>
+                                    <th class="py-3 px-3 text-center">Số lượng</th>
+                                    <th class="py-3 px-3 text-center">Chất lượng còn lại</th>
+                                @else
+                                    <th class="py-3 px-3 text-center">Đơn vị</th>
+                                    <th class="py-3 px-3 text-center">Số lượng</th>
+                                    <th class="py-3 px-4">Chức năng sử dụng</th>
+                                @endif
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($items as $equipment)
+                                <tr>
+                                    <td class="px-4 py-2">{{ $equipment->name }}</td>
+                                    @if($equipment->quality)
+                                        <td class="px-3 py-2 text-center" style="color:#6c757d;">{{ $equipment->power ?? '—' }}</td>
+                                        <td class="px-3 py-2 text-center fw-bold" style="color:#0d1b2a;">{{ $equipment->qty ?? '—' }}</td>
+                                        <td class="px-3 py-2 text-center">
+                                            <span class="fw-bold" style="color:#e8a020;">{{ $equipment->quality }}</span>
+                                        </td>
+                                    @else
+                                        <td class="px-3 py-2 text-center" style="color:#6c757d;">{{ $equipment->unit ?? '—' }}</td>
+                                        <td class="px-3 py-2 text-center fw-bold" style="color:#0d1b2a;">{{ $equipment->qty ?? '—' }}</td>
+                                        <td class="px-4 py-2" style="color:#6c757d;">{{ $equipment->function ?? '—' }}</td>
+                                    @endif
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <p class="mt-3" style="color:#adb5bd;font-size:.8rem;font-style:italic;">
-                * Trên đây là những thiết bị tiêu biểu. Công ty còn có thêm thiết bị chưa liệt kê và có thể liên kết, liên danh hợp tác cho các dự án lớn khi cần thiết.
-            </p>
-        </div>
+        @empty
+            <p class="text-center text-muted">Thông tin thiết bị đang được cập nhật.</p>
+        @endforelse
+
+        <p class="mt-3" style="color:#adb5bd;font-size:.8rem;font-style:italic;">
+            * Trên đây là những thiết bị tiêu biểu. Công ty còn có thêm thiết bị chưa liệt kê và có thể liên kết, liên danh hợp tác cho các dự án lớn khi cần thiết.
+        </p>
     </div>
 </section>
 
 {{-- ============================================================
+     7. DỊCH VỤ NỔI BẬT
+     ============================================================ --}}
+<x-services-preview :services="$services" />
+
+{{-- ============================================================
      6. MỘT SỐ HÌNH ẢNH HOẠT ĐỘNG
      ============================================================ --}}
-<section style="padding:80px 0;background:#fff;">
+<section style="background:#fff;">
     <div class="container">
         <div class="mb-5">
             <span style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:#e8a020;">
@@ -388,43 +314,70 @@
             </h2>
         </div>
 
-        <div class="row g-3">
-            <div class="col-md-7" data-aos="fade-right">
-                <div class="overflow-hidden rounded" style="height:420px;">
-                    <img src="{{ asset('images/Aspose.Words.4bc199bf-9f3d-489a-a241-0b9706d15e84.033.png') }}"
-                         alt="Thi công ép cọc Thành Nam" class="w-100 h-100" style="object-fit:cover;transition:transform .4s;"
-                         onmouseover="this.style.transform='scale(1.04)'"
-                         onmouseout="this.style.transform='scale(1)'">
-                </div>
-            </div>
-            <div class="col-md-5 d-flex flex-column gap-3" data-aos="fade-left">
-                <div class="overflow-hidden rounded flex-grow-1" style="height:200px;">
-                    <img src="{{ asset('images/Aspose.Words.4bc199bf-9f3d-489a-a241-0b9706d15e84.034.png') }}"
-                         alt="Công trình nền móng Thành Nam" class="w-100 h-100" style="object-fit:cover;transition:transform .4s;"
-                         onmouseover="this.style.transform='scale(1.04)'"
-                         onmouseout="this.style.transform='scale(1)'">
-                </div>
-                <div class="overflow-hidden rounded flex-grow-1" style="height:200px;">
-                    <img src="{{ asset('images/Aspose.Words.4bc199bf-9f3d-489a-a241-0b9706d15e84.035.png') }}"
-                         alt="Hoạt động thi công Thành Nam" class="w-100 h-100" style="object-fit:cover;transition:transform .4s;"
-                         onmouseover="this.style.transform='scale(1.04)'"
-                         onmouseout="this.style.transform='scale(1)'">
-                </div>
-            </div>
-        </div>
+        @php
+            $mainImage = $activityImages->first();
+            $sideImages = $activityImages->slice(1, 2);
+            $bottomImage = $activityImages->slice(3, 1)->first();
 
-        {{-- 4th image full width --}}
-        <div class="row g-3 mt-0" data-aos="fade-up">
-            <div class="col-12">
-                <div class="overflow-hidden rounded">
-                    <img src="{{ asset('images/Aspose.Words.4bc199bf-9f3d-489a-a241-0b9706d15e84.036.jpeg') }}"
-                         alt="Ép cọc bê tông Thành Nam" class="w-100 h-100"
-                         style="object-fit:cover;object-position:center 30%;transition:transform .4s;"
-                         onmouseover="this.style.transform='scale(1.02)'"
-                         onmouseout="this.style.transform='scale(1)'">
+            $resolveImageUrl = function ($path) {
+                if (!$path) {
+                    return '';
+                }
+
+                if (str_starts_with($path, 'http')) {
+                    return $path;
+                }
+
+                if (str_starts_with($path, '/')) {
+                    return asset(ltrim($path, '/'));
+                }
+
+                if (str_starts_with($path, 'images/') || str_starts_with($path, 'pdf/') || str_starts_with($path, 'storage/')) {
+                    return asset($path);
+                }
+
+                return Storage::url($path);
+            };
+        @endphp
+
+        @if($mainImage)
+            <div class="row g-3">
+                <div class="col-md-7" data-aos="fade-right">
+                    <div class="overflow-hidden rounded" style="height:420px;">
+                        <img src="{{ $resolveImageUrl($mainImage->image_path) }}"
+                             alt="{{ $mainImage->title }}" class="w-100 h-100" style="object-fit:cover;transition:transform .4s;"
+                             onmouseover="this.style.transform='scale(1.04)'"
+                             onmouseout="this.style.transform='scale(1)'">
+                    </div>
+                </div>
+                <div class="col-md-5 d-flex flex-column gap-3" data-aos="fade-left">
+                    @foreach($sideImages as $image)
+                        <div class="overflow-hidden rounded flex-grow-1" style="height:200px;">
+                            <img src="{{ $resolveImageUrl($image->image_path) }}"
+                                 alt="{{ $image->title }}" class="w-100 h-100" style="object-fit:cover;transition:transform .4s;"
+                                 onmouseover="this.style.transform='scale(1.04)'"
+                                 onmouseout="this.style.transform='scale(1)'">
+                        </div>
+                    @endforeach
                 </div>
             </div>
-        </div>
+
+            @if($bottomImage)
+                <div class="row g-3 mt-0" data-aos="fade-up">
+                    <div class="col-12">
+                        <div class="overflow-hidden rounded">
+                            <img src="{{ $resolveImageUrl($bottomImage->image_path) }}"
+                                 alt="{{ $bottomImage->title }}" class="w-100 h-100"
+                                 style="object-fit:cover;object-position:center 30%;transition:transform .4s;"
+                                 onmouseover="this.style.transform='scale(1.02)'"
+                                 onmouseout="this.style.transform='scale(1)'">
+                        </div>
+                    </div>
+                </div>
+            @endif
+        @else
+            <p class="text-center text-muted">Hình ảnh hoạt động đang được cập nhật.</p>
+        @endif
     </div>
 </section>
 

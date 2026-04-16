@@ -7,6 +7,9 @@ use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\ActivityAreaController;
+use App\Http\Controllers\Admin\EquipmentController;
+use App\Http\Controllers\Admin\ActivityImageController;
 use App\Http\Controllers\Public\AboutController;
 use App\Http\Controllers\Public\ContactController;
 use App\Http\Controllers\Public\HomeController;
@@ -40,6 +43,9 @@ Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function
     Route::resource('services', AdminServiceController::class)->names('services');
     Route::resource('news', AdminNewsController::class)->names('news');
     Route::resource('projects', ProjectController::class)->names('projects');
+    Route::resource('activity-areas', ActivityAreaController::class)->names('activity-areas');
+    Route::resource('equipments', EquipmentController::class)->names('equipments');
+    Route::resource('activity-images', ActivityImageController::class)->names('activity-images');
     Route::resource('contact-messages', ContactMessageController::class)
         ->only(['index', 'show', 'destroy'])
         ->names('contact-messages');
