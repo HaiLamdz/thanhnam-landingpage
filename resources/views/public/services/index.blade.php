@@ -60,22 +60,6 @@ $rest     = $services->skip(2);
                     Từ thiết kế kết cấu đến quản lý dự án, chúng tôi mang đến giải pháp toàn diện cho mọi công trình.
                 </p>
             </div>
-            <div class="d-flex align-items-end pb-1" data-aos="fade-left">
-                <div class="d-flex gap-2 flex-wrap">
-                    <a href="{{ route('services.index') }}"
-                       class="btn btn-sm fw-semibold px-3"
-                       style="background:#0d1b2a;color:#fff;border-radius:20px;font-size:.8rem;">
-                        Tất cả
-                    </a>
-                    @foreach(['Thiết kế','Hạ tầng','Quản lý dự án','Tư vấn'] as $cat)
-                    <a href="#"
-                       class="btn btn-sm fw-semibold px-3"
-                       style="background:#fff;color:#6c757d;border:1px solid #dee2e6;border-radius:20px;font-size:.8rem;">
-                        {{ $cat }}
-                    </a>
-                    @endforeach
-                </div>
-            </div>
         </div>
     </div>
 </section>

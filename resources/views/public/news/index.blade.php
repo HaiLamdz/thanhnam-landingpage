@@ -42,33 +42,6 @@ $placeholders = [
                     Tương Lai Của<br>Hạ Tầng.
                 </h1>
             </div>
-
-            {{-- Right: category filter pills --}}
-            <div class="d-flex align-items-end pb-2">
-                <div class="d-flex gap-2 flex-wrap">
-                    <a href="{{ route('news.index') }}"
-                       class="btn btn-sm fw-semibold px-3"
-                       style="background:#0d1b2a;color:#fff;border-radius:20px;font-size:.8rem;">
-                        Tất cả
-                    </a>
-                    <a href="#"
-                       class="btn btn-sm fw-semibold px-3"
-                       style="background:#fff;color:#6c757d;border:1px solid #dee2e6;border-radius:20px;font-size:.8rem;">
-                        Dự án
-                    </a>
-                    <a href="#"
-                       class="btn btn-sm fw-semibold px-3"
-                       style="background:#fff;color:#6c757d;border:1px solid #dee2e6;border-radius:20px;font-size:.8rem;">
-                        Doanh nghiệp
-                    </a>
-                    <a href="#"
-                       class="btn btn-sm fw-semibold px-3"
-                       style="background:#fff;color:#6c757d;border:1px solid #dee2e6;border-radius:20px;font-size:.8rem;">
-                        Sự kiện
-                    </a>
-                </div>
-            </div>
-
         </div>
     </div>
 </section>

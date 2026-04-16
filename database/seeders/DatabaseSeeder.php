@@ -18,6 +18,9 @@ class DatabaseSeeder extends Seeder
             SiteSettingSeeder::class,
             AdminUserSeeder::class,
             SampleDataSeeder::class,
+            ActivityAreaSeeder::class,
+            EquipmentSeeder::class,
+            ActivityImageSeeder::class,
         ]);
     }
 }

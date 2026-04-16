@@ -205,7 +205,7 @@
         {!! setting('google_maps_embed') !!}
     @else
         <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4!2d106.6!3d10.77!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDQ2JzEyLjAiTiAxMDbCsDM2JzAwLjAiRQ!5e0!3m2!1svi!2svn!4v1234567890"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.4687076655546!2d105.74193741112688!3d21.05393408052083!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313454fae6f364f5%3A0x8e58efffe1a725f7!2zQ0hJIE5Iw4FOSCAyIEPDlE5HIFRZIFROSEggVuG6rFQgVMavIFjDglkgROG7sE5HIFZJ4buGVCBOQU0!5e0!3m2!1svi!2s!4v1776319989025!5m2!1svi!2s"
             width="100%" height="420" style="border:0;filter:grayscale(20%);" allowfullscreen="" loading="lazy"
             referrerpolicy="no-referrer-when-downgrade">
         </iframe>
