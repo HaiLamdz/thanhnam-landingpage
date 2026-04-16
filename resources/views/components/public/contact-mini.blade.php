@@ -19,7 +19,7 @@
                             <i class="bi bi-envelope" style="color:#0d1b2a;"></i>
                         </div>
                         <div>
-                            <div style="font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#adb5bd;margin-bottom:.2rem;">Email</div>
+                            <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#0d1b2a;margin-bottom:.2rem;">Email</div>
                             <a href="mailto:{{ setting('contact_email') }}" class="text-decoration-none fw-medium" style="color:#0d1b2a;">
                                 {{ setting('contact_email') }}
                             </a>
@@ -34,7 +34,7 @@
                             <i class="bi bi-telephone" style="color:#0d1b2a;"></i>
                         </div>
                         <div>
-                            <div style="font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#adb5bd;margin-bottom:.2rem;">Điện thoại</div>
+                            <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#0d1b2a;margin-bottom:.2rem;">Điện thoại</div>
                             <a href="tel:{{ setting('contact_phone') }}" class="text-decoration-none fw-medium" style="color:#0d1b2a;">
                                 {{ setting('contact_phone') }}
                             </a>
@@ -49,7 +49,7 @@
                             <i class="bi bi-geo-alt" style="color:#0d1b2a;"></i>
                         </div>
                         <div>
-                            <div style="font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#adb5bd;margin-bottom:.2rem;">Địa chỉ</div>
+                            <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#0d1b2a;margin-bottom:.2rem;">Địa chỉ</div>
                             <span class="fw-medium" style="color:#0d1b2a;">{{ setting('contact_address') }}</span>
                         </div>
                     </div>
@@ -67,11 +67,15 @@
                 @endif
 
                 <div class="p-4 rounded-3" style="background:#f8f9fa;border:1px solid #e9ecef;">
+                    <style>
+                        #homeContactForm ::placeholder { color: #ced4da; opacity: 1; }
+                        #homeContactForm ::-ms-input-placeholder { color: #ced4da; }
+                    </style>
                     <form action="{{ route('contact.store') }}" method="POST" novalidate id="homeContactForm">
                         @csrf
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <label class="form-label" style="font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#adb5bd;">
+                                <label class="form-label" style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#0d1b2a;">
                                     Họ và tên <span class="text-danger">*</span>
                                 </label>
                                 <input type="text" name="name" value="{{ old('name') }}"
@@ -82,7 +86,7 @@
                                 <div class="invalid-feedback">@error('name'){{ $message }}@else Vui lòng nhập họ tên (ít nhất 2 ký tự).@enderror</div>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label" style="font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#adb5bd;">
+                                <label class="form-label" style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#0d1b2a;">
                                     Email <span class="text-danger">*</span>
                                 </label>
                                 <input type="email" name="email" value="{{ old('email') }}"
@@ -93,7 +97,7 @@
                                 <div class="invalid-feedback">@error('email'){{ $message }}@else Vui lòng nhập email hợp lệ.@enderror</div>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label" style="font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#adb5bd;">
+                                <label class="form-label" style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#0d1b2a;">
                                     Dịch vụ quan tâm <span class="text-danger">*</span>
                                 </label>
                                 <select name="subject" class="form-select @error('subject') is-invalid @enderror"
@@ -110,7 +114,7 @@
                                 <div class="invalid-feedback">@error('subject'){{ $message }}@else Vui lòng chọn dịch vụ.@enderror</div>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label" style="font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#adb5bd;">
+                                <label class="form-label" style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#0d1b2a;">
                                     Ngân sách dự kiến
                                 </label>
                                 <input type="text" name="budget" value="{{ old('budget') }}"
@@ -119,7 +123,7 @@
                                        style="border-color:#e9ecef;border-radius:6px;padding:.65rem 1rem;background:#fff;">
                             </div>
                             <div class="col-12">
-                                <label class="form-label" style="font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#adb5bd;">
+                                <label class="form-label" style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#0d1b2a;">
                                     Nội dung <span class="text-danger">*</span>
                                 </label>
                                 <textarea name="message" rows="4"

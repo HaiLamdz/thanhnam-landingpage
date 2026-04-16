@@ -203,41 +203,35 @@ $placeholders = [
 </section>
 
 {{-- ============================================================
-     5. NEWSLETTER SUBSCRIPTION
+     5. CTA
      ============================================================ --}}
 <section style="background:#f4f5f7;padding:0 0 80px;">
     <div class="container">
-        <div class="row g-0 overflow-hidden rounded-3" style="min-height:280px;">
-
-            {{-- Left: form --}}
-            <div class="col-md-6 p-5" style="background:#fff;" data-aos="fade-right">
-                <h3 class="fw-bold mb-2" style="color:#0d1b2a;font-size:1.75rem;">Luôn Cập Nhật.</h3>
-                <p style="color:#6c757d;font-size:.9rem;line-height:1.7;margin-bottom:1.5rem;">
-                    Nhận những thông tin kỹ thuật và cập nhật dự án mới nhất trực tiếp vào hộp thư của bạn.
+        <div class="rounded-3 overflow-hidden row g-0" style="min-height:240px;">
+            <div class="col-md-6 p-5 d-flex flex-column justify-content-center" style="background:#0d1b2a;" data-aos="fade-right">
+                <span style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:#e8a020;display:block;margin-bottom:1rem;">
+                    Hợp tác cùng chúng tôi
+                </span>
+                <h3 class="fw-bold text-white mb-3" style="font-size:clamp(1.3rem,2.5vw,1.8rem);line-height:1.3;">
+                    Bạn có dự án cần tư vấn?
+                </h3>
+                <p style="color:rgba(255,255,255,.6);font-size:.9rem;line-height:1.7;margin-bottom:1.75rem;">
+                    Đội ngũ kỹ sư của chúng tôi sẵn sàng hỗ trợ từ khảo sát đến thi công hoàn thiện.
                 </p>
-                <div class="d-flex gap-2 mb-2">
-                    <input type="email" placeholder="Địa chỉ email của bạn"
-                           class="form-control"
-                           style="border-radius:6px;border-color:#dee2e6;padding:.65rem 1rem;font-size:.9rem;">
-                    <button class="btn fw-semibold px-4 flex-shrink-0"
-                            style="background:#0d1b2a;color:#fff;border-radius:6px;white-space:nowrap;font-size:.875rem;">
-                        Đăng ký
-                    </button>
+                <div>
+                    <a href="{{ route('contact.index') }}"
+                       class="btn fw-semibold px-4 py-2 d-inline-flex align-items-center gap-2"
+                       style="background:#e8a020;color:#fff;border-radius:6px;font-size:.9rem;">
+                        Liên hệ ngay <i class="bi bi-arrow-right"></i>
+                    </a>
                 </div>
-                <p style="color:#adb5bd;font-size:.75rem;line-height:1.5;">
-                    Bằng cách đăng ký, bạn đồng ý với chính sách bảo mật của chúng tôi. Bạn có thể hủy đăng ký bất kỳ lúc nào.
-                </p>
             </div>
-
-            {{-- Right: image --}}
             <div class="col-md-6 position-relative" style="min-height:240px;" data-aos="fade-left">
-                <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80"
-                     alt="Newsletter"
-                     class="w-100 h-100 position-absolute top-0 start-0"
+                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80"
+                     alt="Liên hệ" class="w-100 h-100 position-absolute top-0 start-0"
                      style="object-fit:cover;">
-                <div style="position:absolute;inset:0;background:rgba(13,27,42,.4);"></div>
+                <div style="position:absolute;inset:0;background:rgba(13,27,42,.3);"></div>
             </div>
-
         </div>
     </div>
 </section>
