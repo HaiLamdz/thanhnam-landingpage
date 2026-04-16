@@ -15,18 +15,18 @@
         <div class="card-header bg-white fw-semibold">Phần Banner Chính</div>
         <div class="card-body">
             <div class="mb-3">
-                <label class="form-label">Tiêu đề chính</label>
+                <label class="form-label fw-semibold">Tiêu đề chính</label>
                 <input type="text" name="hero_headline" class="form-control @error('hero_headline') is-invalid @enderror"
                     value="{{ old('hero_headline', $settings['hero_headline']->value ?? '') }}">
                 @error('hero_headline')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
             <div class="mb-3">
-                <label class="form-label">Mô tả ngắn</label>
+                <label class="form-label fw-semibold">Mô tả ngắn</label>
                 <textarea name="hero_description" rows="3" class="form-control @error('hero_description') is-invalid @enderror">{{ old('hero_description', $settings['hero_description']->value ?? '') }}</textarea>
                 @error('hero_description')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
             <div class="mb-3">
-                <label class="form-label">Ảnh nền banner chính</label>
+                <label class="form-label fw-semibold">Ảnh nền banner chính</label>
                 <x-admin.image-preview :path="$settings['hero_bg_image']->value ?? null" />
                 <input type="file" name="hero_bg_image" class="form-control @error('hero_bg_image') is-invalid @enderror" accept="image/jpeg,image/png,image/webp">
                 @error('hero_bg_image')<div class="invalid-feedback">{{ $message }}</div>@enderror
@@ -39,25 +39,25 @@
         <div class="card-header bg-white fw-semibold">Giới thiệu tóm tắt</div>
         <div class="card-body">
             <div class="mb-3">
-                <label class="form-label">Ảnh minh hoạ phần giới thiệu</label>
+                <label class="form-label fw-semibold">Ảnh minh hoạ phần giới thiệu</label>
                 <x-admin.image-preview :path="$settings['about_image']->value ?? null" />
                 <input type="file" name="about_image" class="form-control @error('about_image') is-invalid @enderror" accept="image/jpeg,image/png,image/webp">
                 @error('about_image')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
             <div class="mb-3">
-                <label class="form-label">Nội dung giới thiệu</label>
+                <label class="form-label fw-semibold">Nội dung giới thiệu</label>
                 <textarea name="about_text" rows="4" class="form-control @error('about_text') is-invalid @enderror">{{ old('about_text', $settings['about_text']->value ?? '') }}</textarea>
                 @error('about_text')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <label class="form-label">Nhãn chỉ số nổi bật</label>
+                    <label class="form-label fw-semibold">Nhãn chỉ số nổi bật</label>
                     <input type="text" name="about_stat_label" class="form-control @error('about_stat_label') is-invalid @enderror"
                         value="{{ old('about_stat_label', $settings['about_stat_label']->value ?? '') }}">
                     @error('about_stat_label')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label class="form-label">Giá trị chỉ số nổi bật</label>
+                    <label class="form-label fw-semibold">Giá trị chỉ số nổi bật</label>
                     <input type="text" name="about_stat_value" class="form-control @error('about_stat_value') is-invalid @enderror"
                         value="{{ old('about_stat_value', $settings['about_stat_value']->value ?? '') }}">
                     @error('about_stat_value')<div class="invalid-feedback">{{ $message }}</div>@enderror
@@ -71,13 +71,13 @@
         <div class="card-header bg-white fw-semibold">Băng-rôn kêu gọi hành động</div>
         <div class="card-body">
             <div class="mb-3">
-                <label class="form-label">Tiêu đề kêu gọi hành động</label>
+                <label class="form-label fw-semibold">Tiêu đề kêu gọi hành động</label>
                 <input type="text" name="cta_heading" class="form-control @error('cta_heading') is-invalid @enderror"
                     value="{{ old('cta_heading', $settings['cta_heading']->value ?? '') }}">
                 @error('cta_heading')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
             <div class="mb-3">
-                <label class="form-label">Nội dung kêu gọi hành động</label>
+                <label class="form-label fw-semibold">Nội dung kêu gọi hành động</label>
                 <textarea name="cta_description" rows="3" class="form-control @error('cta_description') is-invalid @enderror">{{ old('cta_description', $settings['cta_description']->value ?? '') }}</textarea>
                 @error('cta_description')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
@@ -89,19 +89,19 @@
         <div class="card-header bg-white fw-semibold">Thông tin liên hệ</div>
         <div class="card-body">
             <div class="mb-3">
-                <label class="form-label">Địa chỉ</label>
+                <label class="form-label fw-semibold">Địa chỉ</label>
                 <input type="text" name="contact_address" class="form-control @error('contact_address') is-invalid @enderror"
                     value="{{ old('contact_address', $settings['contact_address']->value ?? '') }}">
                 @error('contact_address')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
             <div class="mb-3">
-                <label class="form-label">Địa chỉ email</label>
+                <label class="form-label fw-semibold">Địa chỉ email</label>
                 <input type="text" name="contact_email" class="form-control @error('contact_email') is-invalid @enderror"
                     value="{{ old('contact_email', $settings['contact_email']->value ?? '') }}">
                 @error('contact_email')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
             <div class="mb-3">
-                <label class="form-label">Số điện thoại</label>
+                <label class="form-label fw-semibold">Số điện thoại</label>
                 <input type="text" name="contact_phone" class="form-control @error('contact_phone') is-invalid @enderror"
                     value="{{ old('contact_phone', $settings['contact_phone']->value ?? '') }}">
                 @error('contact_phone')<div class="invalid-feedback">{{ $message }}</div>@enderror
@@ -114,24 +114,24 @@
         <div class="card-header bg-white fw-semibold">Chân trang</div>
         <div class="card-body">
             <div class="mb-3">
-                <label class="form-label">Mô tả chân trang</label>
+                <label class="form-label fw-semibold">Mô tả chân trang</label>
                 <textarea name="footer_description" rows="3" class="form-control @error('footer_description') is-invalid @enderror">{{ old('footer_description', $settings['footer_description']->value ?? '') }}</textarea>
                 @error('footer_description')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
             <div class="mb-3">
-                <label class="form-label">Đường dẫn LinkedIn</label>
+                <label class="form-label fw-semibold">Đường dẫn LinkedIn</label>
                 <input type="text" name="social_linkedin" class="form-control @error('social_linkedin') is-invalid @enderror"
                     value="{{ old('social_linkedin', $settings['social_linkedin']->value ?? '') }}">
                 @error('social_linkedin')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
             <div class="mb-3">
-                <label class="form-label">Đường dẫn Facebook</label>
+                <label class="form-label fw-semibold">Đường dẫn Facebook</label>
                 <input type="text" name="social_facebook" class="form-control @error('social_facebook') is-invalid @enderror"
                     value="{{ old('social_facebook', $settings['social_facebook']->value ?? '') }}">
                 @error('social_facebook')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
             <div class="mb-3">
-                <label class="form-label">Đường dẫn YouTube</label>
+                <label class="form-label fw-semibold">Đường dẫn YouTube</label>
                 <input type="text" name="social_youtube" class="form-control @error('social_youtube') is-invalid @enderror"
                     value="{{ old('social_youtube', $settings['social_youtube']->value ?? '') }}">
                 @error('social_youtube')<div class="invalid-feedback">{{ $message }}</div>@enderror
@@ -144,7 +144,7 @@
         <div class="card-header bg-white fw-semibold">Trang Giới thiệu</div>
         <div class="card-body">
             <div class="mb-3">
-                <label class="form-label">Nội dung trang Giới thiệu</label>
+                <label class="form-label fw-semibold">Nội dung trang Giới thiệu</label>
                 <textarea name="about_page_content" rows="8" class="form-control @error('about_page_content') is-invalid @enderror">{{ old('about_page_content', $settings['about_page_content']->value ?? '') }}</textarea>
                 @error('about_page_content')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
@@ -156,19 +156,19 @@
         <div class="card-header bg-white fw-semibold">Thông tin chung</div>
         <div class="card-body">
             <div class="mb-3">
-                <label class="form-label">Tên công ty</label>
+                <label class="form-label fw-semibold">Tên công ty</label>
                 <input type="text" name="company_name" class="form-control @error('company_name') is-invalid @enderror"
                     value="{{ old('company_name', $settings['company_name']->value ?? '') }}">
                 @error('company_name')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
             <div class="mb-3">
-                <label class="form-label">Logo công ty</label>
+                <label class="form-label fw-semibold">Logo công ty</label>
                 <x-admin.image-preview :path="$settings['company_logo']->value ?? null" />
                 <input type="file" name="company_logo" class="form-control @error('company_logo') is-invalid @enderror" accept="image/jpeg,image/png,image/webp">
                 @error('company_logo')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
             <div class="mb-3">
-                <label class="form-label">Mô tả meta mặc định (dùng cho SEO)</label>
+                <label class="form-label fw-semibold">Mô tả meta mặc định (dùng cho SEO)</label>
                 <textarea name="meta_description_default" rows="2" class="form-control @error('meta_description_default') is-invalid @enderror">{{ old('meta_description_default', $settings['meta_description_default']->value ?? '') }}</textarea>
                 @error('meta_description_default')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
