@@ -98,6 +98,16 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label" style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#0d1b2a;">
+                                    Số điện thoại
+                                </label>
+                                <input type="tel" name="phone" value="{{ old('phone') }}"
+                                       class="form-control"
+                                       placeholder="0912 345 678"
+                                       maxlength="20"
+                                       style="border-color:#e9ecef;border-radius:6px;padding:.65rem 1rem;background:#fff;">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#0d1b2a;">
                                     Dịch vụ quan tâm <span class="text-danger">*</span>
                                 </label>
                                 <select name="subject" class="form-select @error('subject') is-invalid @enderror"
