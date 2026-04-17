@@ -139,6 +139,27 @@
                                 <div class="invalid-feedback">@error('email'){{ $message }}@else Vui lòng nhập email hợp lệ.@enderror</div>
                             </div>
 
+                            {{-- Row 1b: Phone --}}
+                            <div class="col-md-6">
+                                <label class="form-label" style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#0d1b2a;">
+                                    Số điện thoại
+                                </label>
+                                <input type="tel" name="phone" value="{{ old('phone') }}"
+                                       class="form-control"
+                                       placeholder="0912 345 678"
+                                       maxlength="20"
+                                       style="border-color:#e9ecef;border-radius:6px;padding:.7rem 1rem;">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#0d1b2a;">
+                                    Ngân sách dự kiến
+                                </label>
+                                <input type="text" name="budget" value="{{ old('budget') }}"
+                                       class="form-control"
+                                       placeholder="vd: 500 triệu – 1 tỷ"
+                                       style="border-color:#e9ecef;border-radius:6px;padding:.7rem 1rem;">
+                            </div>
+
                             {{-- Row 2: Service + Budget --}}
                             <div class="col-md-6">
                                 <label class="form-label" style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#0d1b2a;">
@@ -156,15 +177,6 @@
                                     <option value="Khác" {{ old('subject') == 'Khác' ? 'selected' : '' }}>Khác</option>
                                 </select>
                                 <div class="invalid-feedback">@error('subject'){{ $message }}@else Vui lòng chọn dịch vụ.@enderror</div>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label" style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#0d1b2a;">
-                                    Ngân sách dự kiến
-                                </label>
-                                <input type="text" name="budget" value="{{ old('budget') }}"
-                                       class="form-control"
-                                       placeholder="vd: 500 triệu – 1 tỷ"
-                                       style="border-color:#e9ecef;border-radius:6px;padding:.7rem 1rem;">
                             </div>
 
                             {{-- Row 3: Message --}}
