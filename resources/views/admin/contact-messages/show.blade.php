@@ -21,6 +21,15 @@
                 <a href="mailto:{{ $contactMessage->email }}">{{ $contactMessage->email }}</a>
             </dd>
 
+            <dt class="col-sm-3 text-muted">Số điện thoại</dt>
+            <dd class="col-sm-9">
+                @if($contactMessage->phone)
+                    <a href="tel:{{ $contactMessage->phone }}">{{ $contactMessage->phone }}</a>
+                @else
+                    <span class="text-muted">—</span>
+                @endif
+            </dd>
+
             <dt class="col-sm-3 text-muted">Chủ đề</dt>
             <dd class="col-sm-9">{{ $contactMessage->subject }}</dd>
 

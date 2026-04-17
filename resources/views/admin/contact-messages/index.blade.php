@@ -41,6 +41,7 @@
                 <tr>
                     <th>Người gửi</th>
                     <th>Email</th>
+                    <th>Điện thoại</th>
                     <th>Chủ đề</th>
                     <th>Ngày nhận</th>
                     <th>Trạng thái</th>
@@ -52,6 +53,7 @@
                 <tr class="{{ !$message->is_read ? 'table-light fw-semibold' : '' }}">
                     <td>{{ $message->name }}</td>
                     <td>{{ $message->email }}</td>
+                    <td>{{ $message->phone ?? '—' }}</td>
                     <td>{{ Str::limit($message->subject, 50) }}</td>
                     <td>{{ $message->created_at->format('d/m/Y H:i') }}</td>
                     <td>
@@ -77,7 +79,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="6" class="text-center text-muted py-4">Chưa có tin nhắn nào.</td>
+                    <td colspan="7" class="text-center text-muted py-4">Chưa có tin nhắn nào.</td>
                 </tr>
                 @endforelse
             </tbody>
